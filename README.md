@@ -9,4 +9,5 @@ Organized by https://www.youtube.com/user/miziziziz, link: https://itch.io/jam/m
 
 ## Licence
 Source Code: All Rights Reserved - Anicet Nougaret 2020
+
 Shared by the author for educational purposes.
