@@ -49,6 +49,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierAddPawn.gd"
 }, {
+"base": "Modifier",
+"class": "ModifierGiveActionPoints",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierGiveActionPoints.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierLetSidePlay",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierLetSidePlay.gd"
+}, {
 "base": "Entity",
 "class": "Pawn",
 "language": "GDScript",
@@ -78,6 +88,8 @@ _global_script_class_icons={
 "Game": "",
 "Modifier": "",
 "ModifierAddPawn": "",
+"ModifierGiveActionPoints": "",
+"ModifierLetSidePlay": "",
 "Pawn": "",
 "Side": "",
 "Tile": "",

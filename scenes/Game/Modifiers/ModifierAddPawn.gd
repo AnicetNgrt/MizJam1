@@ -11,8 +11,9 @@ func _init(sideNum:int,pawn:Pawn):
 
 func execute(game:Game):
 	.execute(game)
-	game.addPawnToSide(_sideNum,_pawn)
+	if game.canAddPawnToSide(_sideNum):
+		game.addPawnToSide(_sideNum,_pawn)
 
 func undo(game:Game):
 	.undo(game)
-	game.removePawnToSide(_sideNum,_pawn)
+	game.removePawnFromSide(_sideNum,_pawn)

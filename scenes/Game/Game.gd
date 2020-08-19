@@ -9,9 +9,11 @@ onready var _sides = []
 onready var _board = $Board
 onready var _timeline = $Timeline
 
-export(Resource) var rules = _default_rules setget _set_rules
+var playingSideNum = 0
+
+export(Resource) var _rules = _default_rules setget _set_rules
 func _set_rules(value:Rules) -> void:
-	rules = value
+	_rules = value
 
 func _ready():
 	startGame()
@@ -19,18 +21,24 @@ func _ready():
 func startGame():
 	pass
 
-# @pre: 1 <= sideNum <= 2
-func removePawnToSide(sideNum:int,pawn:Pawn):
-	_getSideByNum(sideNum).removePawn(pawn)
+func getTurnStartActionPoints() -> int:
+	return _rules.actionPoints
 
-# @pre: 1 <= sideNum <= 2
+func addActionPointsToSide(sideNum:int, count:int):
+	_getSideByNum(sideNum).actionPoints += count
+
+func removeActionPointsFromSide(sideNum:int, count:int):
+	_getSideByNum(sideNum).actionPoints += count
+
 # @pre: canAddPawnToSide(sideNum) == true
 func addPawnToSide(sideNum:int,pawn:Pawn):
 	_getSideByNum(sideNum).addPawn(pawn)
 
-# @pre: 1 <= sideNum <= 2
 func canAddPawnToSide(sideNum:int) -> bool:
-	return _getSideByNum(sideNum).getPawnCount() < rules.maxPawnCountPerSide
+	return _getSideByNum(sideNum).getPawnCount() < _rules.maxPawnCountPerSide
+
+func removePawnFromSide(sideNum:int,pawn:Pawn):
+	_getSideByNum(sideNum).removePawn(pawn)
 
 # @pre: 1 <= sideNum <= 2
 func _getSideByNum(sideNum:int) -> Side:
