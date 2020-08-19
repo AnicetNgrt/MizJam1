@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Board",
+"language": "GDScript",
+"path": "res://Board.gd"
+}, {
 "base": "Entity",
 "class": "Card",
 "language": "GDScript",
@@ -17,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "CardEffect",
 "language": "GDScript",
-"path": "res://cardEffects/CardEffect.gd"
+"path": "res://scenes/Card/cardEffects/CardEffect.gd"
 }, {
 "base": "Node",
 "class": "Entity",
@@ -28,12 +33,43 @@ _global_script_classes=[ {
 "class": "Game",
 "language": "GDScript",
 "path": "res://scenes/Game/Game.gd"
+}, {
+"base": "Entity",
+"class": "Modifier",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/Modifier.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierAddPawn",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierAddPawn.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierAddTile",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierAddTile.gd"
+}, {
+"base": "Entity",
+"class": "Pawn",
+"language": "GDScript",
+"path": "res://scenes/Pawn/Pawn.gd"
+}, {
+"base": "Entity",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://scenes/Tile/Tile.gd"
 } ]
 _global_script_class_icons={
+"Board": "",
 "Card": "",
 "CardEffect": "",
 "Entity": "",
-"Game": ""
+"Game": "",
+"Modifier": "",
+"ModifierAddPawn": "",
+"ModifierAddTile": "",
+"Pawn": "",
+"Tile": ""
 }
 
 [application]
@@ -45,7 +81,9 @@ config/icon="res://icon.png"
 
 IdManager="*res://global/IdManager.gd"
 Constants="*res://global/Constants.gd"
+Cardinals="*res://global/Cardinals.gd"
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_environment="res://default_env.tres"

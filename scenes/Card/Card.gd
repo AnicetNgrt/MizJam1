@@ -37,3 +37,13 @@ func isOverplayedTurn() -> bool:
 func play() -> void:
 	playedTurn -= 1
 	playedGame -= 1
+
+#func getNetworkingObject() -> Dictionary:
+#	var object = .getNetworkingObject()
+#	object.type = "Card"
+#	object.weight = weight
+#	object.limitTurn = limitTurn
+#	object.limitGame = limitGame
+#	object.playedTurn = playedTurn
+#	object.playedGame = playedGame
+#	return object
