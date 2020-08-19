@@ -1,4 +1,4 @@
-extends Entity
+extends Node
 
 class_name Game
 
@@ -19,7 +19,7 @@ func _ready():
 	startGame()
 
 func startGame():
-	pass
+	_timeline.createAndAddTurns(_rules)
 
 func getTurnStartActionPoints() -> int:
 	return _rules.actionPoints

@@ -1,4 +1,4 @@
-extends Object
+extends Node
 
 enum Sides {
 	S1 = 1,

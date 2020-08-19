@@ -1,4 +1,4 @@
-extends Entity
+extends Node
 
 class_name Modifier
 

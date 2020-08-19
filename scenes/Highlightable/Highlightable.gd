@@ -1,6 +1,6 @@
 extends Node
 
-class_name Entity
+class_name Highlightable
 
 var id = Constants.UNDEFINED_ID
 
@@ -8,11 +8,5 @@ func _init():
 	id = IdManager.getNextId()
 
 # @pre: other.id != Constants.UNDEFINED_ID or self.id != Constants.UNDEFINED_ID
-func isSameEntityThan(other:Entity) -> bool:
+func isSameHighlightableThan(other:Highlightable) -> bool:
 	return other.id == id
-
-#func getNetworkingObject() -> Dictionary:
-#	return {
-#		"type":"Entity",
-#		"id":id
-#	}

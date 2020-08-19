@@ -1,6 +1,6 @@
 extends Modifier
 
-class_name ModifierLetSidePlay
+class_name ModifierSetPlayingSide
 
 var _sideNum
 var _previousSideNum

@@ -1,4 +1,4 @@
-extends Entity
+extends Highlightable
 
 class_name Pawn
 
