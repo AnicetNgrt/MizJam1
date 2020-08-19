@@ -2,10 +2,10 @@ extends Entity
 
 class_name Modifier
 
-func execute():
+func execute(game:Game):
 	pass
 
-func undo():
+func undo(game:Game):
 	pass
 
 #func getNetworkingObject() -> Dictionary:

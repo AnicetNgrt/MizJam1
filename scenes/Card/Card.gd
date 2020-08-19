@@ -8,12 +8,11 @@ export(int,0,999) var limitTurn:int = 0
 export(int,0,999) var limitGame:int = 0
 
 export(int,0,999) var playedTurn:int = 0 setget _set_playedTurn
-export(int,0,999) var playedGame:int = 0 setget _set_playedGame
-
 # @pre: 0 < value < Constants.INFINITY
 func _set_playedTurn(value:int) -> void:
 	playedTurn = value
-
+	
+export(int,0,999) var playedGame:int = 0 setget _set_playedGame
 # @pre: 0 < value < Constants.INFINITY
 func _set_playedGame(value:int) -> void:
 	playedGame = value
@@ -37,13 +36,3 @@ func isOverplayedTurn() -> bool:
 func play() -> void:
 	playedTurn -= 1
 	playedGame -= 1
-
-#func getNetworkingObject() -> Dictionary:
-#	var object = .getNetworkingObject()
-#	object.type = "Card"
-#	object.weight = weight
-#	object.limitTurn = limitTurn
-#	object.limitGame = limitGame
-#	object.playedTurn = playedTurn
-#	object.playedGame = playedGame
-#	return object

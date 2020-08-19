@@ -2,23 +2,17 @@ extends Modifier
 
 class_name ModifierAddPawn
 
-var _game:Game
+var _sideNum:int
 var _pawn:Pawn
 
-func _init(game:Game,pawn:Pawn):
-	_game = game
+func _init(sideNum:int,pawn:Pawn):
+	_sideNum = sideNum
 	_pawn = pawn
 
-func execute():
-	.execute()
-	_game.add_child(_pawn)
+func execute(game:Game):
+	.execute(game)
+	game.addPawnToSide(_sideNum,_pawn)
 
-func undo():
-	.undo()
-	_game.remove_child(_pawn)
-
-#func getNetworkingObject() -> Dictionary:
-#	var object = .getNetworkingObject()
-#	object.type = "ModifierAddPawn"
-#	object.entities["pawn"] = _pawn
-#	return object
+func undo(game:Game):
+	.undo(game)
+	game.removePawnToSide(_sideNum,_pawn)

@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Board",
 "language": "GDScript",
-"path": "res://Board.gd"
+"path": "res://scenes/Board/Board.gd"
 }, {
 "base": "Entity",
 "class": "Card",
@@ -25,11 +25,16 @@ _global_script_classes=[ {
 "path": "res://scenes/Card/cardEffects/CardEffect.gd"
 }, {
 "base": "Node",
+"class": "CardStack",
+"language": "GDScript",
+"path": "res://scenes/CardStack/CardStack.gd"
+}, {
+"base": "Node",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://scenes/Entity/Entity.gd"
 }, {
-"base": "Node",
+"base": "Entity",
 "class": "Game",
 "language": "GDScript",
 "path": "res://scenes/Game/Game.gd"
@@ -44,38 +49,44 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierAddPawn.gd"
 }, {
-"base": "Modifier",
-"class": "ModifierAddTile",
-"language": "GDScript",
-"path": "res://scenes/Game/Modifiers/ModifierAddTile.gd"
-}, {
 "base": "Entity",
 "class": "Pawn",
 "language": "GDScript",
 "path": "res://scenes/Pawn/Pawn.gd"
 }, {
 "base": "Entity",
+"class": "Side",
+"language": "GDScript",
+"path": "res://scenes/Side/Side.gd"
+}, {
+"base": "Entity",
 "class": "Tile",
 "language": "GDScript",
 "path": "res://scenes/Tile/Tile.gd"
+}, {
+"base": "Node",
+"class": "Timeline",
+"language": "GDScript",
+"path": "res://scenes/Game/Timeline.gd"
 } ]
 _global_script_class_icons={
 "Board": "",
 "Card": "",
 "CardEffect": "",
+"CardStack": "",
 "Entity": "",
 "Game": "",
 "Modifier": "",
 "ModifierAddPawn": "",
-"ModifierAddTile": "",
 "Pawn": "",
-"Tile": ""
+"Side": "",
+"Tile": "",
+"Timeline": ""
 }
 
 [application]
 
 config/name="MizJam1"
-config/icon="res://icon.png"
 
 [autoload]
 
@@ -86,4 +97,3 @@ Cardinals="*res://global/Cardinals.gd"
 [rendering]
 
 quality/driver/driver_name="GLES2"
-environment/default_environment="res://default_env.tres"
