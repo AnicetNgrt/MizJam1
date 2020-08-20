@@ -10,6 +10,7 @@ onready var _board = $Board
 onready var _timeline = $Timeline
 
 var playingSideNum = 0
+var currentTurn = 0
 
 export(Resource) var _rules = _default_rules setget _set_rules
 func _set_rules(value:Rules) -> void:
@@ -19,10 +20,31 @@ func _ready():
 	startGame()
 
 func startGame():
-	_timeline.createAndAddTurns(_rules)
+	_initTurns()
+
+func _initTurns():
+	for i in range(0,_rules.maxTurnCount):
+		_initTurn(i)
+
+func _initTurn(num:int):
+	var _turn = Turn.new(num,_rules)
+	var _modifier = ModifierAddTurnToTimeline.new(_turn)
+	executeModifier(_modifier)
 
 func getTurnStartActionPoints() -> int:
 	return _rules.actionPoints
+
+func executeModifier(modifier:Modifier):
+	pass
+
+func addTurnToTimeline(turn:Turn):
+	_timeline.addTurn(turn)
+
+func removeTurnFromTimeline(turn:Turn):
+	_timeline.removeTurn(turn)
+
+func gotoTurn(turnNum:int):
+	currentTurn = turnNum
 
 func addActionPointsToSide(sideNum:int, count:int):
 	_getSideByNum(sideNum).actionPoints += count

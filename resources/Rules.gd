@@ -1,5 +1,6 @@
 extends Resource
 
+export(int,0,999) var maxTurnCount
 export(int,0,999) var actionPoints
 export(int,0,9) var startPawnCountPerSide
 export(int,0,9) var maxPawnCountPerSide

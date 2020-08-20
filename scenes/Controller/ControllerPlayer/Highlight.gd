@@ -9,6 +9,7 @@ enum Meanings {
 	
 }
 
-var type:int
+var layer:int
 var meaning:int
+var targetType:int
 var targetId:int

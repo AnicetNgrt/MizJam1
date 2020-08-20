@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+maxTurnCount = 0
 actionPoints = 4
 startPawnCountPerSide = 3
 maxPawnCountPerSide = 4
