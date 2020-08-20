@@ -4,10 +4,12 @@ class_name Modifier
 
 var previousModifier:Modifier = null
 
-func execute(game:Game):
+# @param: game:Game
+func execute(game):
 	pass
 
-func undo(game:Game):
+# @param: game:Game
+func undo(game):
 	pass
 
 #func getNetworkingObject() -> Dictionary:

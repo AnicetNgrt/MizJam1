@@ -9,10 +9,12 @@ func _init(sideNum:int,count:int):
 	_sideNum = sideNum
 	_count = count
 
-func execute(game:Game):
+# @param: game:Game
+func execute(game):
 	.execute(game)
 	game.addActionPointsToSide(_sideNum,_count)
 
-func undo(game:Game):
+# @param: game:Game
+func undo(game):
 	.undo(game)
 	game.removeActionPointsFromSide(_sideNum,_count)

@@ -8,11 +8,13 @@ var _previousSideNum
 func _init(sideNum:int):
 	_sideNum = sideNum
 
-func execute(game:Game):
+# @param: game:Game
+func execute(game):
 	.execute(game)
 	_previousSideNum = game.playingSideNum
 	game.playingSideNum = _sideNum
 
-func undo(game:Game):
+# @param: game:Game
+func undo(game):
 	.undo(game)
 	game.playingSideNum = _previousSideNum

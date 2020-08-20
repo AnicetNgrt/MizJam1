@@ -2,15 +2,19 @@ extends Modifier
 
 class_name ModifierAddTurnToTimeline
 
-var _turn:Turn
+# @type: Turn
+var _turn
 
-func _init(turn:Turn):
+# @param: turn:Turn
+func _init(turn):
 	_turn = turn
 
-func execute(game:Game):
+# @param: game:Game
+func execute(game):
 	.execute(game)
 	game.addTurnToTimeline(_turn)
 
-func undo(game:Game):
+# @param: game:Game
+func undo(game):
 	.undo(game)
 	game.removeTurnFromTimeline(_turn)

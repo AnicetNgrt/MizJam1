@@ -4,11 +4,11 @@ class_name Turn
 
 const Rules = preload("res://resources/Rules.gd")
 
-var _num
+var num
 
-func _init(num:int, rules:Rules):
-	_num = num
-	var playingNum = _num%2 + 1
-	var idleNum = (_num + 1)%2 + 1
+func setup(num:int, rules:Rules):
+	self.num = num
+	var playingNum = num%2 + 1
+	var idleNum = (num + 1)%2 + 1
 	add_child(ModifierSetPlayingSide.new(playingNum))
 	add_child(ModifierGiveActionPoints.new(playingNum,rules.actionPoints))

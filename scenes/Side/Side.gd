@@ -2,6 +2,8 @@ extends Node
 
 class_name Side
 
+onready var _controllers = $Controllers
+
 export(int,0,999) var actionPoints: int
 
 func getPawnCount() -> int:
@@ -16,3 +18,16 @@ func addPawn(pawn:Pawn):
 
 func removePawn(pawn:Pawn):
 	remove_child(pawn)
+
+func spreadModifierToExecute(modifier:Modifier):
+	for c in _getControllers():
+		if c is ControllerSpectator:
+			c.executeModifier(modifier)
+
+func spreadModifierToUndo(modifier:Modifier):
+	for c in _getControllers():
+		if c is ControllerSpectator:
+			c.undoModifier(modifier)
+
+func _getControllers():
+	return _controllers.get_children()

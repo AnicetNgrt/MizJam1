@@ -6,13 +6,15 @@ const Rules = preload("res://resources/Rules.gd")
 const _default_rules = preload("res://resources/default_rules.tres")
 const _TurnPackedScene = preload("res://scenes/Turn/Turn.tscn")
 
-onready var _sides = []
+onready var _sides = $Sides
 onready var _board = $Board
 onready var _timeline = $Timeline
+onready var _initialStack = $InitialStack
 
 var playingSideNum:int = 0
 var currentTurn:int = 0
-var _lastModifier:Modifier = null
+# @type: Modifier
+var _lastModifier = null
 
 export(Resource) var _rules = _default_rules setget _set_rules
 func _set_rules(value:Rules) -> void:
@@ -22,39 +24,66 @@ func _ready():
 	startGame()
 
 func startGame():
-	_initTurns()
+	_executeInitialStack()
+	_initSides()
+	if _getSideCount() >= 2:
+		_initTurns()
+
+func _executeInitialStack():
+	for c in _initialStack.get_children():
+		if c is Modifier:
+			executeModifier(c)
+
+func _initSides():
+	for c in get_children():
+		if c is Side:
+			_sides.append(c)
 
 func _initTurns():
 	for i in range(0,_rules.maxTurnCount):
 		_initTurn(i)
 
 func _initTurn(num:int):
-	var turn:Turn = _TurnPackedScene.instance()
-	turn._init(num, _rules)
+	var turn = _TurnPackedScene.instance()
+	turn.setup(num, _rules)
 	var modifier = ModifierAddTurnToTimeline.new(turn)
 	executeModifier(modifier)
 
 func getTurnStartActionPoints() -> int:
 	return _rules.actionPoints
 
-func executeModifier(modifier:Modifier):
+# @param: modifier:Modifier
+func executeModifier(modifier):
 	modifier.execute(self)
 	modifier.previousModifier = _lastModifier
 	_lastModifier = modifier
+	_spreadModifierToExecute(modifier)
 
-func undoModifier(modifier:Modifier):
+func _spreadModifierToExecute(modifier):
+	for s in _sides:
+		s._spreadModifierToExecute(modifier)
+
+# @param: modifier:Modifier
+func undoModifier(modifier):
 	modifier.undo(self)
 	_lastModifier = modifier.previousModifier
+	_spreadModifierToUndo(modifier)
+
+func _spreadModifierToUndo(modifier):
+	for s in _sides:
+		s._spreadModifierToUndo(modifier)
 
 func undoModifierChain(count:int):
 	while(_lastModifier != null and count > 0):
 		count -= 1
 		undoModifier(_lastModifier)
 
-func addTurnToTimeline(turn:Turn):
+# @param: turn:Turn
+func addTurnToTimeline(turn):
 	_timeline.addTurn(turn)
 
-func removeTurnFromTimeline(turn:Turn):
+# @param: turn:Turn
+func removeTurnFromTimeline(turn):
 	_timeline.removeTurn(turn)
 
 func gotoTurn(turnNum:int):
@@ -78,4 +107,7 @@ func removePawnFromSide(sideNum:int,pawn:Pawn):
 
 # @pre: 1 <= sideNum <= 2
 func _getSideByNum(sideNum:int) -> Side:
-	return _sides[sideNum-1]
+	return _sides.get_child(sideNum - 1)
+
+func _getSideCount() -> int:
+	return _sides.get_child_count()
