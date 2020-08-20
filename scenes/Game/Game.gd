@@ -4,13 +4,15 @@ class_name Game
 
 const Rules = preload("res://resources/Rules.gd")
 const _default_rules = preload("res://resources/default_rules.tres")
+const _TurnPackedScene = preload("res://scenes/Turn/Turn.tscn")
 
 onready var _sides = []
 onready var _board = $Board
 onready var _timeline = $Timeline
 
-var playingSideNum = 0
-var currentTurn = 0
+var playingSideNum:int = 0
+var currentTurn:int = 0
+var _lastModifier:Modifier = null
 
 export(Resource) var _rules = _default_rules setget _set_rules
 func _set_rules(value:Rules) -> void:
@@ -27,15 +29,27 @@ func _initTurns():
 		_initTurn(i)
 
 func _initTurn(num:int):
-	var _turn = Turn.new(num,_rules)
-	var _modifier = ModifierAddTurnToTimeline.new(_turn)
-	executeModifier(_modifier)
+	var turn:Turn = _TurnPackedScene.instance()
+	turn._init(num, _rules)
+	var modifier = ModifierAddTurnToTimeline.new(turn)
+	executeModifier(modifier)
 
 func getTurnStartActionPoints() -> int:
 	return _rules.actionPoints
 
 func executeModifier(modifier:Modifier):
-	pass
+	modifier.execute(self)
+	modifier.previousModifier = _lastModifier
+	_lastModifier = modifier
+
+func undoModifier(modifier:Modifier):
+	modifier.undo(self)
+	_lastModifier = modifier.previousModifier
+
+func undoModifierChain(count:int):
+	while(_lastModifier != null and count > 0):
+		count -= 1
+		undoModifier(_lastModifier)
 
 func addTurnToTimeline(turn:Turn):
 	_timeline.addTurn(turn)
