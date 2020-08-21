@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Ui/RegularLabel/RegularLabel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/buttons/leather_big_hover.png" type="Texture" id=2]
+[ext_resource path="res://assets/buttons/leather_big_normal.png" type="Texture" id=3]
+[ext_resource path="res://assets/buttons/leather_big_click.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Ui/LeatherButton/LeatherButton.gd" type="Script" id=5]
+[ext_resource path="res://assets/buttons/leather_big_disabled.png" type="Texture" id=6]
+
+[node name="LeatherButton" type="CenterContainer"]
+margin_left = 24.0
+margin_right = 136.0
+margin_bottom = 32.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="TextureButton" parent="."]
+margin_right = 112.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 2 )
+texture_disabled = ExtResource( 6 )
+
+[node name="Label" parent="." instance=ExtResource( 1 )]
+custom_colors/font_color = Color( 1, 1, 1, 1 )

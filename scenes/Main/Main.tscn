@@ -1,0 +1,203 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://aseprite_tests/mockup3.png" type="Texture" id=1]
+[ext_resource path="res://aseprite_tests/logo.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Main/LoopMusicPlayer.gd" type="Script" id=3]
+[ext_resource path="res://assets/audio/music/Classical Piano - No-Copyright-Music.com - 01 Classical Piano.wav" type="AudioStream" id=4]
+[ext_resource path="res://main_theme.tres" type="Theme" id=5]
+[ext_resource path="res://assets/icons/sound.png" type="Texture" id=6]
+[ext_resource path="res://scenes/Main/AudioSlider.gd" type="Script" id=7]
+[ext_resource path="res://assets/icons/no_sound.png" type="Texture" id=8]
+[ext_resource path="res://scenes/Main/FullscreenSetting.gd" type="Script" id=9]
+[ext_resource path="res://assets/icons/fullscreen_dark.png" type="Texture" id=10]
+[ext_resource path="res://assets/icons/fullscreen.png" type="Texture" id=11]
+[ext_resource path="res://assets/icons/no_fullscreen_dark.png" type="Texture" id=12]
+[ext_resource path="res://assets/icons/no_fullscreen.png" type="Texture" id=13]
+[ext_resource path="res://scenes/Main/MuteButton.gd" type="Script" id=14]
+[ext_resource path="res://assets/nine_patches/leather.png" type="Texture" id=15]
+[ext_resource path="res://scenes/Ui/LeatherButton/LeatherButton.tscn" type="PackedScene" id=16]
+
+[node name="Main" type="Node"]
+
+[node name="MenuUi" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="MenuUi"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="MenuUi"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -177.0
+margin_right = 177.0
+margin_bottom = 120.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="MenuUi"]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Music"
+script = ExtResource( 3 )
+
+[node name="Settings" type="VBoxContainer" parent="MenuUi"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 125.0
+margin_bottom = 48.0
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenSetting" type="HBoxContainer" parent="MenuUi/Settings"]
+margin_right = 117.0
+margin_bottom = 16.0
+theme = ExtResource( 5 )
+script = ExtResource( 9 )
+
+[node name="GoFullScreenButton" type="TextureButton" parent="MenuUi/Settings/FullscreenSetting"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+
+[node name="QuitFullScreenButton" type="TextureButton" parent="MenuUi/Settings/FullscreenSetting"]
+margin_left = 17.0
+margin_right = 33.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 13 )
+
+[node name="AudioVolumeSetting" type="HBoxContainer" parent="MenuUi/Settings"]
+margin_top = 20.0
+margin_right = 117.0
+margin_bottom = 36.0
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MuteButton" type="TextureButton" parent="MenuUi/Settings/AudioVolumeSetting"]
+margin_right = 16.0
+margin_bottom = 16.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 5 )
+toggle_mode = true
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 14 )
+
+[node name="VolumeSlider" type="HSlider" parent="MenuUi/Settings/AudioVolumeSetting"]
+margin_left = 17.0
+margin_right = 37.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 20, 0 )
+theme = ExtResource( 5 )
+min_value = -30.0
+max_value = 6.0
+step = 3.0
+script = ExtResource( 7 )
+
+[node name="Body" type="MarginContainer" parent="MenuUi"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -88.0
+margin_top = -76.0
+margin_right = 92.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 180, 220 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BodyBackground" type="NinePatchRect" parent="MenuUi/Body"]
+visible = false
+margin_right = 180.0
+margin_bottom = 220.0
+texture = ExtResource( 15 )
+region_rect = Rect2( 2, 2, 44, 44 )
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BodyInner" type="MarginContainer" parent="MenuUi/Body"]
+margin_right = 180.0
+margin_bottom = 220.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="BodyRows" type="VBoxContainer" parent="MenuUi/Body/BodyInner"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 170.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 100, 200 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonTutorial" parent="MenuUi/Body/BodyInner/BodyRows" instance=ExtResource( 16 )]
+margin_left = 0.0
+margin_right = 160.0
+label = "Tutorial"
+
+[node name="ButtonLocalVersus" parent="MenuUi/Body/BodyInner/BodyRows" instance=ExtResource( 16 )]
+margin_left = 0.0
+margin_top = 36.0
+margin_right = 160.0
+margin_bottom = 68.0
+label = "Local versus"
+disabled = true
+
+[node name="ButtonAiPlay" parent="MenuUi/Body/BodyInner/BodyRows" instance=ExtResource( 16 )]
+margin_left = 0.0
+margin_top = 72.0
+margin_right = 160.0
+margin_bottom = 104.0
+label = "Local AI (beta)"
+disabled = true
+
+[node name="ButtonOnlinePlay" parent="MenuUi/Body/BodyInner/BodyRows" instance=ExtResource( 16 )]
+margin_left = 0.0
+margin_top = 108.0
+margin_right = 160.0
+margin_bottom = 140.0
+label = "Online play (beta)"
+disabled = true
+
+[node name="2D" type="Node2D" parent="."]
+
+[node name="Mockup" type="Sprite" parent="2D"]
+visible = false
+position = Vector2( 248, 160 )
+texture = ExtResource( 1 )
+[connection signal="finished" from="MenuUi/MusicPlayer" to="MenuUi/MusicPlayer" method="_on_MusicPlayer_finished"]
+[connection signal="pressed" from="MenuUi/Settings/FullscreenSetting/GoFullScreenButton" to="MenuUi/Settings/FullscreenSetting" method="_on_GoFullScreenButton_pressed"]
+[connection signal="pressed" from="MenuUi/Settings/FullscreenSetting/QuitFullScreenButton" to="MenuUi/Settings/FullscreenSetting" method="_on_QuitFullScreenButton_pressed"]
+[connection signal="pressed" from="MenuUi/Settings/AudioVolumeSetting/MuteButton" to="MenuUi/Settings/AudioVolumeSetting/MuteButton" method="_on_MuteButton_pressed"]
+[connection signal="value_changed" from="MenuUi/Settings/AudioVolumeSetting/VolumeSlider" to="MenuUi/Settings/AudioVolumeSetting/VolumeSlider" method="_on_HSlider_value_changed"]
