@@ -135,12 +135,14 @@ _global_script_class_icons={
 [application]
 
 config/name="MizJam1"
+run/main_scene="res://scenes/Game/LocalGame.tscn"
 
 [autoload]
 
 IdManager="*res://global/IdManager.gd"
 Constants="*res://global/Constants.gd"
 Cardinals="*res://global/Cardinals.gd"
+DebugUtils="*res://global/DebugUtils.gd"
 
 [rendering]
 
