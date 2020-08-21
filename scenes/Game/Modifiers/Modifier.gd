@@ -17,3 +17,6 @@ func undo(game):
 #	object.type = "Modifier"
 #	object.entities = {}
 #	return object
+
+func copy():
+	return get_script().new()

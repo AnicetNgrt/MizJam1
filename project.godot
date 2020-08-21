@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Timeline/Timeline.gd"
 }, {
+"base": "Timeline",
+"class": "Timeline2D",
+"language": "GDScript",
+"path": "res://scenes/2D/Timeline2D/Timeline2D.gd"
+}, {
 "base": "Node",
 "class": "Turn",
 "language": "GDScript",
@@ -129,6 +134,7 @@ _global_script_class_icons={
 "Side": "",
 "Tile": "",
 "Timeline": "",
+"Timeline2D": "",
 "Turn": ""
 }
 

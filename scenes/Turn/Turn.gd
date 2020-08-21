@@ -4,7 +4,7 @@ class_name Turn
 
 const Rules = preload("res://resources/Rules.gd")
 
-var num
+var num:int
 
 func setup(num:int, rules:Rules):
 	self.num = num

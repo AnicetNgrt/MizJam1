@@ -18,3 +18,6 @@ func execute(game):
 func undo(game):
 	.undo(game)
 	game.removeActionPointsFromSide(_sideNum,_count)
+
+func copy():
+	return get_script().new(_sideNum, _count)

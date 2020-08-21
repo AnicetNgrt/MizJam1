@@ -4,7 +4,6 @@ class_name Game
 
 const Rules = preload("res://resources/Rules.gd")
 const _default_rules = preload("res://resources/default_rules.tres")
-const _TurnPackedScene = preload("res://scenes/Turn/Turn.tscn")
 
 onready var _sides = $Sides
 onready var _board = $Board
@@ -44,9 +43,7 @@ func _initTurns():
 		_initTurn(i)
 
 func _initTurn(num:int):
-	var turn = _TurnPackedScene.instance()
-	turn.setup(num, _rules)
-	var modifier = ModifierAddTurnToTimeline.new(turn)
+	var modifier = ModifierAddTurnToTimeline.new(num, _rules)
 	executeModifier(modifier)
 
 func getTurnStartActionPoints() -> int:
@@ -60,8 +57,9 @@ func executeModifier(modifier):
 	_spreadModifierToExecute(modifier)
 
 func _spreadModifierToExecute(modifier):
-	for s in _sides:
-		s._spreadModifierToExecute(modifier)
+	for c in _sides.get_children():
+		if c is Side:
+			c.spreadModifierToExecute(modifier.copy())
 
 # @param: modifier:Modifier
 func undoModifier(modifier):
@@ -70,8 +68,9 @@ func undoModifier(modifier):
 	_spreadModifierToUndo(modifier)
 
 func _spreadModifierToUndo(modifier):
-	for s in _sides:
-		s._spreadModifierToUndo(modifier)
+	for c in _sides.get_children():
+		if c is Side:
+			c.spreadModifierToUndo(modifier.copy())
 
 func undoModifierChain(count:int):
 	while(_lastModifier != null and count > 0):

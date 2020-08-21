@@ -22,12 +22,12 @@ func removePawn(pawn:Pawn):
 func spreadModifierToExecute(modifier:Modifier):
 	for c in _getControllers():
 		if c is ControllerSpectator:
-			c.executeModifier(modifier)
+			c.executeModifier(modifier.copy())
 
 func spreadModifierToUndo(modifier:Modifier):
 	for c in _getControllers():
 		if c is ControllerSpectator:
-			c.undoModifier(modifier)
+			c.undoModifier(modifier.copy())
 
 func _getControllers():
 	return _controllers.get_children()
