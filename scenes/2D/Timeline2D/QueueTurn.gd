@@ -5,6 +5,9 @@ enum Sides {
 	NEUTRAL,BLUE,RED
 }
 
+signal part_hover_starts(num, part)
+signal part_hover_stops(num, part)
+
 export(int) var num = 0 setget _set_num
 func _set_num(val):
 	num = val
@@ -46,3 +49,15 @@ func _set_side2(val):
 			$VBoxContainer/SubTurns/SubTurnNeutral2.hide()
 			$VBoxContainer/SubTurns/SubTurnBlue2.hide()
 			$VBoxContainer/SubTurns/SubTurnRed2.show()
+
+func _on_partA_hover_starts():
+	emit_signal("part_hover_starts",num,1)
+
+func _on_partB_hover_starts():
+	emit_signal("part_hover_starts",num,2)
+
+func _on_partA_hover_stops():
+	emit_signal("part_hover_stops",num,1)
+
+func _on_partB_hover_stops():
+	emit_signal("part_hover_stops",num,2)

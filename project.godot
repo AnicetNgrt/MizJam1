@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierSetPlayingSide.gd"
 }, {
+"base": "Modifier",
+"class": "ModifierStartGame",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierStartGame.gd"
+}, {
 "base": "Highlightable",
 "class": "Pawn",
 "language": "GDScript",
@@ -130,6 +135,7 @@ _global_script_class_icons={
 "ModifierGiveActionPoints": "",
 "ModifierGotoTurn": "",
 "ModifierSetPlayingSide": "",
+"ModifierStartGame": "",
 "Pawn": "",
 "Side": "",
 "Tile": "",
@@ -185,3 +191,4 @@ texture={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+environment/default_clear_color=Color( 0, 0, 0, 1 )

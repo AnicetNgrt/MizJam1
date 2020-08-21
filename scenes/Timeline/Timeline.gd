@@ -6,7 +6,7 @@ const Rules = preload("res://resources/Rules.gd")
 
 onready var _turns = {}
 
-var current_turn_num = 3
+var current_turn_num = 0
 
 func getTurnName(num:int):
 	return "Turn"+str(num)

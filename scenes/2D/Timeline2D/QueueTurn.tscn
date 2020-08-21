@@ -94,9 +94,22 @@ margin_bottom = 10.0
 texture = ExtResource( 2 )
 
 [node name="Label" parent="VBoxContainer/Banner" instance=ExtResource( 1 )]
-margin_left = 16.0
+margin_left = 13.0
 margin_top = 0.0
-margin_right = 16.0
+margin_right = 19.0
 margin_bottom = 12.0
-custom_colors/font_color = Color( 0.584314, 0.584314, 0.584314, 1 )
+custom_colors/font_color = Color( 0.639216, 0.654902, 0.760784, 1 )
+text = "0"
 align = 1
+[connection signal="mouse_entered" from="VBoxContainer/SubTurns/SubTurnNeutral" to="." method="_on_partA_hover_starts"]
+[connection signal="mouse_exited" from="VBoxContainer/SubTurns/SubTurnNeutral" to="." method="_on_partA_hover_stops"]
+[connection signal="mouse_entered" from="VBoxContainer/SubTurns/SubTurnRed" to="." method="_on_partA_hover_starts"]
+[connection signal="mouse_exited" from="VBoxContainer/SubTurns/SubTurnRed" to="." method="_on_partA_hover_stops"]
+[connection signal="mouse_entered" from="VBoxContainer/SubTurns/SubTurnBlue" to="." method="_on_partA_hover_starts"]
+[connection signal="mouse_exited" from="VBoxContainer/SubTurns/SubTurnBlue" to="." method="_on_partA_hover_stops"]
+[connection signal="mouse_entered" from="VBoxContainer/SubTurns/SubTurnNeutral2" to="." method="_on_partB_hover_starts"]
+[connection signal="mouse_exited" from="VBoxContainer/SubTurns/SubTurnNeutral2" to="." method="_on_partB_hover_stops"]
+[connection signal="mouse_entered" from="VBoxContainer/SubTurns/SubTurnRed2" to="." method="_on_partB_hover_starts"]
+[connection signal="mouse_exited" from="VBoxContainer/SubTurns/SubTurnRed2" to="." method="_on_partB_hover_stops"]
+[connection signal="mouse_entered" from="VBoxContainer/SubTurns/SubTurnBlue2" to="." method="_on_partB_hover_starts"]
+[connection signal="mouse_exited" from="VBoxContainer/SubTurns/SubTurnBlue2" to="." method="_on_partB_hover_stops"]

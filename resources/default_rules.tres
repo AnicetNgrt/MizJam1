@@ -9,4 +9,4 @@ actionPoints = 4
 startPawnCountPerSide = 3
 maxPawnCountPerSide = 4
 maxWeightPerSideHand = 10
-firstSideToPlay = 0
+firstSideToPlay = 1

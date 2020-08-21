@@ -20,10 +20,9 @@ func _set_rules(value:Rules) -> void:
 	_rules = value
 
 func _ready():
-	startGame()
+	_executeInitialStack()
 
 func startGame():
-	_executeInitialStack()
 	_initSides()
 	if _getSideCount() >= 2:
 		_initTurns()
