@@ -10,9 +10,15 @@ enum TileStates {
 	CONQUERED_S2
 }
 
-export(TileStates) var state = TileStates.NORMAL
-export var position:Vector2
-export var windDirection:Vector2 = Cardinals.DIRECTIONS.C
+export(TileStates) var state = TileStates.NORMAL setget _set_state
+func _set_state(val):
+	state = val
+export var position:Vector2 setget _set_position
+func _set_position(val):
+	position = val
+export var windDirection:Vector2 = Cardinals.DIRECTIONS.C setget _set_windDirection
+func _set_windDirection(val):
+	windDirection = val
 
 # @pre: side in Constants.Sides
 # @post: return in Cardinals.DIRECTIONS.values()

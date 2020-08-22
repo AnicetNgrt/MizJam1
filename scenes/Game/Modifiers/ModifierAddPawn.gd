@@ -17,7 +17,7 @@ func execute(game:Game):
 	if game.canAddPawnToSide(_sideNum):
 		var pawn = Pawn.new()
 		pawn.isAlive = _isAlive
-		pawn.pos = _pos
+		pawn.position = _pos
 		game.addPawnToSide(_sideNum,pawn)
 
 func undo(game:Game):
@@ -34,7 +34,7 @@ func copy():
 
 func getPastDescription():
 	if silent: return ""
-	var m = "<sname> has received a "
+	var m = "<s"+str(_sideNum)+"> has received a "
 	if not _isAlive:
 		m += "dead "
 	m += "pawn"
@@ -45,7 +45,7 @@ func getPastDescription():
 
 func getFutureDescription():
 	if silent: return ""
-	var m = "<sname> did receive a "
+	var m = "<s"+str(_sideNum)+"> did receive a "
 	if not _isAlive:
 		m += "dead "
 	m += "pawn"

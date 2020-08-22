@@ -88,15 +88,18 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 		_bubbleSpike.flip_h = false
 		_bubbleSpike.position = position + Vector2(10,-3)
 	
+	var sname = "Neutral"
 	var title = ""
 	var sideNum = getPlayingSideNumDuringTurnsPartOrNull(num, part)
 	if sideNum == null:
 		title += "Neutral part "+str(part)+" "
 	elif sideNum == 1:
 		title += side1Name
+		sname = side1Name
 		title += "'s "
 	elif sideNum == 2:
 		title += side2Name
+		sname = side2Name
 		title += "'s "
 	title += str(num)
 	if num % 100 < 10 or num % 100 > 19:
@@ -119,14 +122,14 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 			for desc in descriptions[str(num)][str(part)]:
 				var desctext = desc["past"]
 				if desctext != "":
-					_add_start_line(desctext)
+					_add_start_line(desctext.replace("<sname>",sname).replace("<s1>",side1Name).replace("<s2>",side2Name))
 					count += 1
 		else:
 			_bubbleCategoryStart.get_node("Label").text = " Events that will happen:"
 			for desc in descriptions[str(num)][str(part)]:
 				var desctext = desc["future"]
 				if desctext != "":
-					_add_start_line(desctext)
+					_add_start_line(desctext.replace("<sname>",sname).replace("<s1>",side1Name).replace("<s2>",side2Name))
 					count += 1
 		if count > 0:
 			_bubbleCategoryStart.show()
@@ -198,6 +201,7 @@ func _on_turnModifierAdded(modifier:Modifier,num:int,part:int):
 	if not descriptions[str(num)].has(str(part)):
 		descriptions[str(num)][str(part)] = []
 	descriptions[str(num)][str(part)].append({"past":modifier.getPastDescription(),"future":modifier.getFutureDescription()})
+	_on_offset_or_current_changed()
 
 func _on_turnModifierRemoved(index:int,num:int,part:int):
 	descriptions[num][part].remove(index)

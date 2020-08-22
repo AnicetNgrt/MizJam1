@@ -90,6 +90,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Modifiers/ModifierAddSideWith2DController.gd"
 }, {
 "base": "Modifier",
+"class": "ModifierBuildRectBoardFromSize",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierBuildRectBoardFromSize.gd"
+}, {
+"base": "Modifier",
 "class": "ModifierConfigureSides",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierConfigureSides.gd"
@@ -166,6 +171,7 @@ _global_script_class_icons={
 "ModifierAddPawn": "",
 "ModifierAddSide": "",
 "ModifierAddSideWith2DController": "",
+"ModifierBuildRectBoardFromSize": "",
 "ModifierConfigureSides": "",
 "ModifierGiveActionPoints": "",
 "ModifierGotoTurn": "",
