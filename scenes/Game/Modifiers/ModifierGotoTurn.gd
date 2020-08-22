@@ -2,21 +2,27 @@ extends Modifier
 
 class_name ModifierGotoTurn
 
-var _nextTurn
+export(int) var _nextTurn
+export(int) var _nextPart
 var _previousTurn
+var _previousPart
 
-func _init(turnNum:int, previousTurn:int = -1):
+func _init(turnNum:int = 0, part:int = 0):
 	_nextTurn = turnNum
-	_previousTurn = previousTurn
+	_nextPart = part
 
 func execute(game):
 	.execute(game)
 	_previousTurn = game.currentTurn
-	game.gotoTurn(_nextTurn)
+	_previousPart = game.currentPart
+	game.gotoTurn(_nextTurn, _nextPart)
 
 func undo(game):
 	.undo(game)
-	game.gotoTurn(_previousTurn)
+	game.gotoTurn(_previousTurn, _previousPart)
 
 func copy():
-	return get_script().new(_nextTurn, _previousTurn)
+	var ret = get_script().new(_nextTurn, _nextPart)
+	ret._previousTurn = _previousTurn
+	ret._previousPart = _previousPart
+	return ret

@@ -15,6 +15,7 @@ onready var _bubbleTitle = $Body/BubbleContainer/Bubble/Body/TitleContainer/Text
 onready var _queueStart = $Body/Parts/QueueStartContainer/QueueStart
 onready var _queueFinish = $Body/Parts/QueueFinish
 onready var _nowIndicator = $Node2D/NowIndicator
+onready var _nothingMessageLabel = $Body/BubbleContainer/Bubble/NothingMessageContainer/Label
 
 var side1Name = "Side1"
 var side2Name = "Side2"
@@ -106,9 +107,9 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 	
 	_clear_lines()
 	_bubbleCategoryStart.hide()
+	var count = 0
 	if descriptions.has(str(num)) and descriptions[str(num)].has(str(part)):
-		var count = 0
-		if num <= current_turn_num:
+		if num <= current_turn_num and part <= current_part:
 			_bubbleCategoryStart.get_node("Label").text = " Events that already happened:"
 			for desc in descriptions[str(num)][str(part)]:
 				var desctext = desc["past"]
@@ -124,6 +125,12 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 					count += 1
 		if count > 0:
 			_bubbleCategoryStart.show()
+	if count == 0 and num <= current_turn_num and part <= current_part:
+		_nothingMessageLabel.text = "Nothing did happen this turn"
+	elif count == 0:
+		_nothingMessageLabel.text = "Nothing is planned to happen this turn"
+	else:
+		_nothingMessageLabel.text = ""
 	
 func _on_turn2D_part_hover_stops(num:int, part:int):
 	_hide_bubble()

@@ -26,3 +26,6 @@ func getFutureDescription():
 
 func shallBePropagated() -> bool:
 	return true
+
+func getPropagatedVersion():
+	return copy()

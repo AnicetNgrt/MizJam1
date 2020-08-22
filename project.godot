@@ -70,6 +70,16 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Modifiers/ModifierAddPawn.gd"
 }, {
 "base": "Modifier",
+"class": "ModifierAddSide",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierAddSide.gd"
+}, {
+"base": "ModifierAddSide",
+"class": "ModifierAddSideWith2DController",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierAddSideWith2DController.gd"
+}, {
+"base": "Modifier",
 "class": "ModifierAddTurnToTimeline",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierAddTurnToTimeline.gd"
@@ -142,6 +152,8 @@ _global_script_class_icons={
 "Highlightable": "",
 "Modifier": "",
 "ModifierAddPawn": "",
+"ModifierAddSide": "",
+"ModifierAddSideWith2DController": "",
 "ModifierAddTurnToTimeline": "",
 "ModifierConfigureSides": "",
 "ModifierGiveActionPoints": "",

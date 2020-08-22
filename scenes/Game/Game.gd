@@ -12,6 +12,7 @@ onready var _initialStack = $InitialStack
 
 var playingSideNum:int = 0
 var currentTurn:int = 0
+var currentPart:int = 0
 # @type: Modifier
 var _lastModifier = null
 
@@ -52,7 +53,7 @@ func executeModifier(modifier):
 func _spreadModifierToExecute(modifier):
 	for c in _sides.get_children():
 		if c is Side:
-			c.spreadModifierToExecute(modifier.copy())
+			c.spreadModifierToExecute(modifier.getPropagatedVersion())
 
 # @param: modifier:Modifier
 func undoModifier(modifier):
@@ -63,7 +64,7 @@ func undoModifier(modifier):
 func _spreadModifierToUndo(modifier):
 	for c in _sides.get_children():
 		if c is Side:
-			c.spreadModifierToUndo(modifier.copy())
+			c.spreadModifierToUndo(modifier.getPropagatedVersion())
 
 func undoModifierChain(count:int):
 	while(_lastModifier != null and count > 0):
@@ -77,6 +78,10 @@ func configureSides(names:PoolStringArray):
 			c.sname = names[i]
 			i += 1
 
+# @param: side:Side
+func addSide(side):
+	_sides.add_child(side)
+
 # @param: turn:Turn
 func addTurnToTimeline(turn):
 	_timeline.addTurn(turn)
@@ -85,8 +90,9 @@ func addTurnToTimeline(turn):
 func removeTurnFromTimeline(turn):
 	_timeline.removeTurn(turn)
 
-func gotoTurn(turnNum:int):
+func gotoTurn(turnNum:int, part:int):
 	currentTurn = turnNum
+	currentPart = part
 
 func addActionPointsToSide(sideNum:int, count:int):
 	_getSideByNum(sideNum).actionPoints += count
