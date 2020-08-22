@@ -9,7 +9,11 @@ func _init():
 func execute(game):
 	.execute(game)
 	game.startGame()
+	pass
 
 # @param: game:Game
 func undo(game):
 	.undo(game)
+
+func shallBePropagated() -> bool:
+	return false

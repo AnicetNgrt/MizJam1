@@ -4,6 +4,7 @@ class_name Side
 
 onready var _controllers = $Controllers
 
+export(String) var sname
 export(int,0,999) var actionPoints: int
 
 func getPawnCount() -> int:

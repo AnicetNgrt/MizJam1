@@ -14,3 +14,15 @@ func execute(game):
 func undo(game):
 	.undo(game)
 	pass
+
+func copy():
+	pass
+
+func getPastDescription():
+	return "Something happened, but there is no known detail about it."
+
+func getFutureDescription():
+	return "Something will happen, but there is no known detail about it."
+
+func shallBePropagated() -> bool:
+	return true

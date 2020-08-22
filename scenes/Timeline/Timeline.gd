@@ -6,11 +6,11 @@ const Rules = preload("res://resources/Rules.gd")
 
 onready var _turns = {}
 
-var current_part = 2 setget _set_current_part
+var current_part = 1 setget _set_current_part
 func _set_current_part(val):
 	current_part = val
 
-var current_turn_num = 5 setget _set_current_turn_num
+var current_turn_num = 0 setget _set_current_turn_num
 func _set_current_turn_num(val):
 	current_turn_num = val
 

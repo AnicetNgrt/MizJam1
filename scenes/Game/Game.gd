@@ -23,7 +23,6 @@ func _ready():
 	_executeInitialStack()
 
 func startGame():
-	_initSides()
 	if _getSideCount() >= 2:
 		_initTurns()
 
@@ -31,11 +30,6 @@ func _executeInitialStack():
 	for c in _initialStack.get_children():
 		if c is Modifier:
 			executeModifier(c)
-
-func _initSides():
-	for c in get_children():
-		if c is Side:
-			_sides.append(c)
 
 func _initTurns():
 	for i in range(0,_rules.maxTurnCount):
@@ -53,7 +47,7 @@ func executeModifier(modifier):
 	modifier.execute(self)
 	modifier.previousModifier = _lastModifier
 	_lastModifier = modifier
-	_spreadModifierToExecute(modifier)
+	if modifier.shallBePropagated(): _spreadModifierToExecute(modifier)
 
 func _spreadModifierToExecute(modifier):
 	for c in _sides.get_children():
@@ -64,7 +58,7 @@ func _spreadModifierToExecute(modifier):
 func undoModifier(modifier):
 	modifier.undo(self)
 	_lastModifier = modifier.previousModifier
-	_spreadModifierToUndo(modifier)
+	if modifier.shallBePropagated(): _spreadModifierToUndo(modifier)
 
 func _spreadModifierToUndo(modifier):
 	for c in _sides.get_children():
@@ -75,6 +69,13 @@ func undoModifierChain(count:int):
 	while(_lastModifier != null and count > 0):
 		count -= 1
 		undoModifier(_lastModifier)
+
+func configureSides(names:PoolStringArray):
+	var i = 0
+	for c in _sides.get_children():
+		if c is Side:
+			c.sname = names[i]
+			i += 1
 
 # @param: turn:Turn
 func addTurnToTimeline(turn):

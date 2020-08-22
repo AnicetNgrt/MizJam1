@@ -12,11 +12,14 @@ func execute(game):
 func undo(game):
 	pass
 
-#func getNetworkingObject() -> Dictionary:
-#	var object = .getNetworkingObject()
-#	object.type = "Modifier"
-#	object.entities = {}
-#	return object
-
 func copy():
 	return get_script().new()
+
+func getPastDescription():
+	return "Something happened, but there is no known detail about it."
+
+func getFutureDescription():
+	return "Something will happen, but there is no known detail about it."
+
+func shallBePropagated() -> bool:
+	return true

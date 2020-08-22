@@ -22,3 +22,9 @@ func undo(game):
 
 func copy():
 	return get_script().new(_sideNum, _previousSideNum)
+
+func getPastDescription():
+	return ""
+
+func getFutureDescription():
+	return ""

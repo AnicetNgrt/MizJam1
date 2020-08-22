@@ -8,7 +8,7 @@ var num:int
 export var sideA:int = 0
 export var sideB:int = 0
 
-signal modifierAdded(modifier,part)
+signal modifierAdded(modifiern,num,part)
 
 func setup(num:int, rules:Rules):
 	self.num = num
@@ -24,7 +24,7 @@ func setup(num:int, rules:Rules):
 func addModifier(modifier:Modifier, part:int):
 	if part == 1:
 		$PartA.add_child(modifier)
-		emit_signal("modifierAdded",modifier,1)
+		emit_signal("modifierAdded",modifier,num,1)
 	elif part == 2:
 		$PartB.add_child(modifier)
-		emit_signal("modifierAdded",modifier,2)
+		emit_signal("modifierAdded",modifier,num,2)

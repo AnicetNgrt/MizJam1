@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Ui/SoundUtils/HoverSound.gd" type="Script" id=1]
+[ext_resource path="res://assets/audio/sfx/kenney_tick_002.ogg" type="AudioStream" id=2]
+
+[node name="HoverSound" type="AudioStreamPlayer2D"]
+stream = ExtResource( 2 )
+volume_db = -35.0
+pitch_scale = 0.83
+script = ExtResource( 1 )

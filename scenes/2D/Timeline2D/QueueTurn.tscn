@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Ui/RegularLabel/RegularLabel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/timeline/turn_banner.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/timeline/turn_neutral_light.png" type="Texture" id=7]
 [ext_resource path="res://assets/timeline/turn_red_light.png" type="Texture" id=8]
 [ext_resource path="res://assets/timeline/turn_blue_light.png" type="Texture" id=9]
+[ext_resource path="res://scenes/2D/Timeline2D/QueueHoverSound.tscn" type="PackedScene" id=10]
 
 [node name="QueueTurn" type="CenterContainer"]
 anchor_right = 1.0
@@ -38,6 +39,8 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 7 )
 
+[node name="HoverSound" parent="VBoxContainer/SubTurns/SubTurnNeutral1" instance=ExtResource( 10 )]
+
 [node name="SubTurnRed1" type="TextureButton" parent="VBoxContainer/SubTurns"]
 visible = false
 margin_right = 16.0
@@ -46,6 +49,8 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 8 )
 texture_hover = ExtResource( 8 )
+
+[node name="HoverSound" parent="VBoxContainer/SubTurns/SubTurnRed1" instance=ExtResource( 10 )]
 
 [node name="SubTurnBlue1" type="TextureButton" parent="VBoxContainer/SubTurns"]
 visible = false
@@ -56,6 +61,8 @@ texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 9 )
 texture_hover = ExtResource( 9 )
 
+[node name="HoverSound" parent="VBoxContainer/SubTurns/SubTurnBlue1" instance=ExtResource( 10 )]
+
 [node name="SubTurnNeutral2" type="TextureButton" parent="VBoxContainer/SubTurns"]
 margin_left = 17.0
 margin_right = 33.0
@@ -64,6 +71,8 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 7 )
+
+[node name="HoverSound" parent="VBoxContainer/SubTurns/SubTurnNeutral2" instance=ExtResource( 10 )]
 
 [node name="SubTurnRed2" type="TextureButton" parent="VBoxContainer/SubTurns"]
 visible = false
@@ -75,6 +84,8 @@ texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 8 )
 texture_hover = ExtResource( 8 )
 
+[node name="HoverSound" parent="VBoxContainer/SubTurns/SubTurnRed2" instance=ExtResource( 10 )]
+
 [node name="SubTurnBlue2" type="TextureButton" parent="VBoxContainer/SubTurns"]
 visible = false
 margin_left = 17.0
@@ -84,6 +95,8 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 9 )
 texture_hover = ExtResource( 9 )
+
+[node name="HoverSound" parent="VBoxContainer/SubTurns/SubTurnBlue2" instance=ExtResource( 10 )]
 
 [node name="Banner" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 6.0

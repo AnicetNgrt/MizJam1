@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Game/Game.gd"
 }, {
+"base": "Game",
+"class": "Game2D",
+"language": "GDScript",
+"path": "res://scenes/2D/Game2D/Game2D.gd"
+}, {
 "base": "Node",
 "class": "Highlightable",
 "language": "GDScript",
@@ -68,6 +73,11 @@ _global_script_classes=[ {
 "class": "ModifierAddTurnToTimeline",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierAddTurnToTimeline.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierConfigureSides",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierConfigureSides.gd"
 }, {
 "base": "Modifier",
 "class": "ModifierGiveActionPoints",
@@ -128,10 +138,12 @@ _global_script_class_icons={
 "ControllerPlayer": "",
 "ControllerSpectator": "",
 "Game": "",
+"Game2D": "",
 "Highlightable": "",
 "Modifier": "",
 "ModifierAddPawn": "",
 "ModifierAddTurnToTimeline": "",
+"ModifierConfigureSides": "",
 "ModifierGiveActionPoints": "",
 "ModifierGotoTurn": "",
 "ModifierSetPlayingSide": "",
@@ -147,7 +159,7 @@ _global_script_class_icons={
 [application]
 
 config/name="MizJam1"
-run/main_scene="res://scenes/Main/Main.tscn"
+run/main_scene="res://scenes/Game/TutorialGame.tscn"
 
 [autoload]
 
