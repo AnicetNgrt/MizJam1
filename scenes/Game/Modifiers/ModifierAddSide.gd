@@ -28,6 +28,3 @@ func getPastDescription():
 
 func getFutureDescription():
 	return ""
-
-func shallBePropagated() -> bool:
-	return true

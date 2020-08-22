@@ -39,3 +39,16 @@ func removeTurn(turn):
 	var myturn = get_node(getTurnName(turn.num))
 	remove_child(myturn)
 	_turns.erase(str(myturn.num))
+
+func gotoTurnAndPart(num, part):
+	current_part = part
+	current_turn_num = num
+
+func getThisTurnPartStackOrNull():
+	if _turns.has(str(current_turn_num)):
+		if _turns[str(current_turn_num)].get_child_count() >= current_part:
+			return _turns[str(current_turn_num)].get_child(current_part-1)
+		else:
+			return null
+	else:
+		return null

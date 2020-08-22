@@ -24,8 +24,5 @@ func getPastDescription():
 func getFutureDescription():
 	return "Something will happen, but there is no known detail about it."
 
-func shallBePropagated() -> bool:
-	return true
-
 func getPropagatedVersion():
 	return copy()

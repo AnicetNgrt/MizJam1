@@ -4,6 +4,8 @@ class_name Modifier
 
 var previousModifier:Modifier = null
 
+export var propagate: bool = false
+
 # @param: game:Game
 func execute(game):
 	pass

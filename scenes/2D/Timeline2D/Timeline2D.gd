@@ -126,9 +126,9 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 		if count > 0:
 			_bubbleCategoryStart.show()
 	if count == 0 and num <= current_turn_num and part <= current_part:
-		_nothingMessageLabel.text = "Nothing did happen this turn"
+		_nothingMessageLabel.text = "Nothing particular did happen this turn"
 	elif count == 0:
-		_nothingMessageLabel.text = "Nothing is planned to happen this turn"
+		_nothingMessageLabel.text = "Nothing particular is planned to happen this turn"
 	else:
 		_nothingMessageLabel.text = ""
 	

@@ -4,25 +4,25 @@
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddSideWith2DController.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddSide.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierGotoTurn.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Game/Modifiers/ModifierStartGame.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Game/Modifiers/ModifierAddNTurn.gd" type="Script" id=5]
 
 [node name="TutorialGame" instance=ExtResource( 1 )]
 
-[node name="Adding a Side 1 with a 2D controller" type="Node" parent="InitialStack" index="0"]
+[node name="ModifierAddSideWith2DController" type="Node" parent="Stack" index="0"]
 script = ExtResource( 2 )
+propagate = true
 _sname = "Anicet"
-_cname = "Anicet's controller"
 
-[node name="Adding a Side 2 without controllers" type="Node" parent="InitialStack" index="1"]
+[node name="ModifierAddSide" type="Node" parent="Stack" index="1"]
 script = ExtResource( 3 )
-_sname = "Eugène"
+propagate = true
+_sname = "Tibo"
 
-[node name="Starting the game" type="Node" parent="InitialStack" index="2"]
+[node name="ModifierAddNTurn" type="Node" parent="Stack" index="2"]
 script = ExtResource( 5 )
-__meta__ = {
-"_editor_description_": ""
-}
+propagate = true
+_n = 99
 
-[node name="Going to turn 0 part 1" type="Node" parent="InitialStack" index="3"]
+[node name="ModifierGotoTurn" type="Node" parent="Stack" index="3"]
 script = ExtResource( 4 )
-_nextPart = 1
+propagate = true

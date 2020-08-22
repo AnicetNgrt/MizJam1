@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 
 [node name="Sides" type="Node" parent="."]
 
-[node name="InitialStack" type="Node" parent="."]
+[node name="Stack" type="Node" parent="."]
 
 [node name="Timeline" parent="." instance=ExtResource( 3 )]
 

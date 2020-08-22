@@ -8,11 +8,8 @@ const _default_rules = preload("res://resources/default_rules.tres")
 onready var _sides = $Sides
 onready var _board = $Board
 onready var _timeline = $Timeline
-onready var _initialStack = $InitialStack
+onready var _Stack = $Stack
 
-var playingSideNum:int = 0
-var currentTurn:int = 0
-var currentPart:int = 0
 # @type: Modifier
 var _lastModifier = null
 
@@ -20,25 +17,14 @@ export(Resource) var _rules = _default_rules setget _set_rules
 func _set_rules(value:Rules) -> void:
 	_rules = value
 
-func _ready():
-	_executeInitialStack()
+func _physics_process(delta):
+	if _Stack.get_child_count() > 0:
+		_executeStack()
 
-func startGame():
-	if _getSideCount() >= 2:
-		_initTurns()
-
-func _executeInitialStack():
-	for c in _initialStack.get_children():
+func _executeStack():
+	for c in _Stack.get_children():
 		if c is Modifier:
 			executeModifier(c)
-
-func _initTurns():
-	for i in range(0,_rules.maxTurnCount):
-		_initTurn(i)
-
-func _initTurn(num:int):
-	var modifier = ModifierAddTurnToTimeline.new(num, _rules)
-	executeModifier(modifier)
 
 func getTurnStartActionPoints() -> int:
 	return _rules.actionPoints
@@ -48,7 +34,9 @@ func executeModifier(modifier):
 	modifier.execute(self)
 	modifier.previousModifier = _lastModifier
 	_lastModifier = modifier
-	if modifier.shallBePropagated(): _spreadModifierToExecute(modifier)
+	modifier.get_parent().remove_child(modifier)
+	
+	if modifier.propagate: _spreadModifierToExecute(modifier)
 
 func _spreadModifierToExecute(modifier):
 	for c in _sides.get_children():
@@ -59,7 +47,7 @@ func _spreadModifierToExecute(modifier):
 func undoModifier(modifier):
 	modifier.undo(self)
 	_lastModifier = modifier.previousModifier
-	if modifier.shallBePropagated(): _spreadModifierToUndo(modifier)
+	if modifier.propagate: _spreadModifierToUndo(modifier)
 
 func _spreadModifierToUndo(modifier):
 	for c in _sides.get_children():
@@ -91,8 +79,7 @@ func removeTurnFromTimeline(turn):
 	_timeline.removeTurn(turn)
 
 func gotoTurn(turnNum:int, part:int):
-	currentTurn = turnNum
-	currentPart = part
+	_timeline.gotoTurnAndPart(turnNum, part)
 
 func addActionPointsToSide(sideNum:int, count:int):
 	_getSideByNum(sideNum).actionPoints += count
@@ -116,3 +103,11 @@ func _getSideByNum(sideNum:int) -> Side:
 
 func _getSideCount() -> int:
 	return _sides.get_child_count()
+
+func _getCurrentlyPlayingSideOrNull():
+	var part:Node = _timeline.getThisTurnPartStackOrNull()
+	if part == null: return null
+	var side = null
+	for c in part.get_children():
+		if c is ModifierSetPlayingSide:
+			side = c._sideNum
