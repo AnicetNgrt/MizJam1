@@ -20,17 +20,17 @@ func _set_side1(val):
 	if not is_inside_tree(): yield(self,"ready")
 	match(val):
 		Sides.NEUTRAL:
-			$VBoxContainer/SubTurns/SubTurnNeutral.show()
-			$VBoxContainer/SubTurns/SubTurnBlue.hide()
-			$VBoxContainer/SubTurns/SubTurnRed.hide()
+			$VBoxContainer/SubTurns/SubTurnNeutral1.show()
+			$VBoxContainer/SubTurns/SubTurnBlue1.hide()
+			$VBoxContainer/SubTurns/SubTurnRed1.hide()
 		Sides.BLUE:
-			$VBoxContainer/SubTurns/SubTurnNeutral.hide()
-			$VBoxContainer/SubTurns/SubTurnBlue.show()
-			$VBoxContainer/SubTurns/SubTurnRed.hide()
+			$VBoxContainer/SubTurns/SubTurnNeutral1.hide()
+			$VBoxContainer/SubTurns/SubTurnBlue1.show()
+			$VBoxContainer/SubTurns/SubTurnRed1.hide()
 		Sides.RED:
-			$VBoxContainer/SubTurns/SubTurnNeutral.hide()
-			$VBoxContainer/SubTurns/SubTurnBlue.hide()
-			$VBoxContainer/SubTurns/SubTurnRed.show()
+			$VBoxContainer/SubTurns/SubTurnNeutral1.hide()
+			$VBoxContainer/SubTurns/SubTurnBlue1.hide()
+			$VBoxContainer/SubTurns/SubTurnRed1.show()
 
 export(Sides) var side2 = Sides.NEUTRAL setget _set_side2
 func _set_side2(val):
