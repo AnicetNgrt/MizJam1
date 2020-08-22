@@ -105,6 +105,16 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Modifiers/ModifierGotoTurn.gd"
 }, {
 "base": "Modifier",
+"class": "ModifierPlanSidePlayAlternance",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierPlanSidePlayAlternance.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierRefillApEachTurn",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierRefillApEachTurn.gd"
+}, {
+"base": "Modifier",
 "class": "ModifierSetPlayingSide",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierSetPlayingSide.gd"
@@ -159,6 +169,8 @@ _global_script_class_icons={
 "ModifierConfigureSides": "",
 "ModifierGiveActionPoints": "",
 "ModifierGotoTurn": "",
+"ModifierPlanSidePlayAlternance": "",
+"ModifierRefillApEachTurn": "",
 "ModifierSetPlayingSide": "",
 "Pawn": "",
 "Side": "",

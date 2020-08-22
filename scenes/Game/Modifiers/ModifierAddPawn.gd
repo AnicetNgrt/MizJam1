@@ -27,9 +27,13 @@ func undo(game:Game):
 		_addedPawn = null
 
 func copy():
-	return get_script().new(_sideNum,_isAlive,_pos)
+	var copy = get_script().new(_sideNum,_isAlive,_pos)
+	copy.propagate = propagate
+	copy.silent = silent
+	return copy
 
 func getPastDescription():
+	if silent: return ""
 	var m = "<sname> has received a "
 	if not _isAlive:
 		m += "dead "
@@ -40,6 +44,7 @@ func getPastDescription():
 	return m
 
 func getFutureDescription():
+	if silent: return ""
 	var m = "<sname> did receive a "
 	if not _isAlive:
 		m += "dead "

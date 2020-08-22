@@ -19,23 +19,21 @@ func _set_rules(value:Rules) -> void:
 
 func _physics_process(delta):
 	if _Stack.get_child_count() > 0:
-		_executeStack()
-
-func _executeStack():
-	for c in _Stack.get_children():
-		if c is Modifier:
-			executeModifier(c)
+		executeModifier(_Stack.get_child(0))
 
 func getTurnStartActionPoints() -> int:
 	return _rules.actionPoints
 
 # @param: modifier:Modifier
 func executeModifier(modifier):
+	if modifier.get_parent():
+		modifier.get_parent().remove_child(modifier)
+	var part = _timeline.getThisTurnOrNull()
+	if part != null:
+		part.addModifier(modifier, _timeline.current_part)
 	modifier.execute(self)
 	modifier.previousModifier = _lastModifier
 	_lastModifier = modifier
-	modifier.get_parent().remove_child(modifier)
-	
 	if modifier.propagate: _spreadModifierToExecute(modifier)
 
 func _spreadModifierToExecute(modifier):
@@ -103,11 +101,3 @@ func _getSideByNum(sideNum:int) -> Side:
 
 func _getSideCount() -> int:
 	return _sides.get_child_count()
-
-func _getCurrentlyPlayingSideOrNull():
-	var part:Node = _timeline.getThisTurnPartStackOrNull()
-	if part == null: return null
-	var side = null
-	for c in part.get_children():
-		if c is ModifierSetPlayingSide:
-			side = c._sideNum

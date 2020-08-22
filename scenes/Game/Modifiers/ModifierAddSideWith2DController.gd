@@ -15,7 +15,13 @@ func execute(game):
 	side.get_node("Controllers").add_child(_Controller2DPackedScene.instance())
 
 func copy():
-	return get_script().new(_sname, _actionPoints, _cname)
+	var copy = get_script().new(_sname, _actionPoints, _cname)
+	copy.propagate = propagate
+	copy.silent = silent
+	return copy
 
 func getPropagatedVersion():
-	return ModifierAddSide.new(_sname, _actionPoints)
+	var ret = ModifierAddSide.new(_sname, _actionPoints)
+	ret.silent = silent
+	ret.propagate = propagate
+	return ret

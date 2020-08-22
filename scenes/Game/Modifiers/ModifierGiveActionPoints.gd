@@ -20,10 +20,15 @@ func undo(game):
 	game.removeActionPointsFromSide(_sideNum,_count)
 
 func copy():
-	return get_script().new(_sideNum, _count)
+	var copy = get_script().new(_sideNum, _count)
+	copy.propagate = propagate
+	copy.silent = silent
+	return copy
 
 func getPastDescription():
-	return ""
+	if silent: return ""
+	return "<s"+str(_sideNum)+"> was given "+str(_count)+" action points."
 
 func getFutureDescription():
-	return ""
+	if silent: return ""
+	return "<s"+str(_sideNum)+"> will be given "+str(_count)+" action points."

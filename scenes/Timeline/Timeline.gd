@@ -41,8 +41,8 @@ func removeTurn(turn):
 	_turns.erase(str(myturn.num))
 
 func gotoTurnAndPart(num, part):
-	current_part = part
-	current_turn_num = num
+	self.current_part = part
+	self.current_turn_num = num
 
 func getThisTurnPartStackOrNull():
 	if _turns.has(str(current_turn_num)):
@@ -52,3 +52,51 @@ func getThisTurnPartStackOrNull():
 			return null
 	else:
 		return null
+
+func getThisTurnOrNull():
+	if _turns.has(str(current_turn_num)):
+		return _turns[str(current_turn_num)]
+	else:
+		return null
+
+func getCurrentlyPlayingSideNumOrNull():
+	var part:Node = getThisTurnPartStackOrNull()
+	if part == null: return null
+	var side = null
+	for c in part.get_children():
+		if c is ModifierSetPlayingSide:
+			side = c._sideNum
+	return side
+
+func getPlayingSideNumDuringTurnsPartOrNull(num:int, part:int):
+	if _turns.has(str(num)):
+		if _turns[str(num)].get_child_count() >= part:
+			var partNode = _turns[str(num)].get_child(part-1)
+			var side = null
+			for c in partNode.get_children():
+				if c is ModifierSetPlayingSide:
+					side = c._sideNum
+			return side
+		else:
+			return null
+	else:
+		return null
+
+func getTurnOrNull(num:int):
+	if _turns.has(str(num)):
+		return _turns[str(num)]
+	else:
+		return null
+
+func getAllTurnNums():
+	var all = []
+	for turn in _turns.values():
+		all.append(turn.num)
+	return all
+
+func getAllFutureAndPresentTurnNums():
+	var all = []
+	for turn in _turns.values():
+		if turn.num >= current_turn_num:
+			all.append(turn.num)
+	return all

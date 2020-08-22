@@ -27,12 +27,17 @@ func undo(game):
 		game.removeTurnFromTimeline(_turns[i])
 
 func copy():
-	return get_script().new(_at, _n)
+	var copy = get_script().new(_at, _n)
+	copy.propagate = propagate
+	copy.silent = silent
+	return copy
 
 func getPastDescription():
+	if silent: return ""
 	return str(_n)+" turns from turn n°"+str(_at)+" were added to the game."
 
 func getFutureDescription():
+	if silent: return ""
 	return str(_n)+" turns from turn n°"+str(_at)+" will be added to the game."
 
 func getPropagatedVersion():

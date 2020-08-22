@@ -21,10 +21,15 @@ func execute(game):
 	return side
 
 func copy():
-	return get_script().new(_sname, _actionPoints)
+	var copy = get_script().new(_sname, _actionPoints)
+	copy.propagate = propagate
+	copy.silent = silent
+	return copy
 
 func getPastDescription():
+	if silent: return ""
 	return ""
 
 func getFutureDescription():
+	if silent: return ""
 	return ""

@@ -13,8 +13,8 @@ func _init(turnNum:int = 0, part:int = 0):
 
 func execute(game):
 	.execute(game)
-	_previousTurn = game.currentTurn
-	_previousPart = game.currentPart
+	_previousTurn = game._timeline.current_turn_num
+	_previousPart = game._timeline.current_part
 	game.gotoTurn(_nextTurn, _nextPart)
 
 func undo(game):
@@ -25,4 +25,6 @@ func copy():
 	var ret = get_script().new(_nextTurn, _nextPart)
 	ret._previousTurn = _previousTurn
 	ret._previousPart = _previousPart
+	ret.propagate = propagate
+	ret.silent = silent
 	return ret

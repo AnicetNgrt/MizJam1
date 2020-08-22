@@ -89,11 +89,16 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 		_bubbleSpike.position = position + Vector2(10,-3)
 	
 	var title = ""
-	if part == 1:
+	var sideNum = getPlayingSideNumDuringTurnsPartOrNull(num, part)
+	if sideNum == null:
+		title += "Neutral part "+str(part)+" "
+	elif sideNum == 1:
 		title += side1Name
-	elif part == 2:
+		title += "'s "
+	elif sideNum == 2:
 		title += side2Name
-	title += "'s "+str(num)
+		title += "'s "
+	title += str(num)
 	if num % 100 < 10 or num % 100 > 19:
 		match(num % 10):
 			1:title += "st"
@@ -109,7 +114,7 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 	_bubbleCategoryStart.hide()
 	var count = 0
 	if descriptions.has(str(num)) and descriptions[str(num)].has(str(part)):
-		if num <= current_turn_num and part <= current_part:
+		if (num == current_turn_num and part <= current_part) or num < current_turn_num:
 			_bubbleCategoryStart.get_node("Label").text = " Events that already happened:"
 			for desc in descriptions[str(num)][str(part)]:
 				var desctext = desc["past"]
@@ -125,10 +130,10 @@ func _on_turn2D_part_hover_starts(num:int, part:int):
 					count += 1
 		if count > 0:
 			_bubbleCategoryStart.show()
-	if count == 0 and num <= current_turn_num and part <= current_part:
-		_nothingMessageLabel.text = "Nothing particular did happen this turn"
+	if count == 0 and ((num == current_turn_num and part <= current_part) or num < current_turn_num):
+		_nothingMessageLabel.text = "Nothing in particular did happen this turn"
 	elif count == 0:
-		_nothingMessageLabel.text = "Nothing particular is planned to happen this turn"
+		_nothingMessageLabel.text = "Nothing in particular is planned to happen this turn"
 	else:
 		_nothingMessageLabel.text = ""
 	
@@ -169,6 +174,8 @@ func _on_offset_or_current_changed():
 			var turn2D = _parts.get_node(getTurnName(c.num) + "2D")
 			if c.num >= current_turn_num+offset and c.num < current_turn_num+offset + 8:
 				turn2D.show()
+				turn2D.side1 = getPlayingSideNumDuringTurnsPartOrNull(c.num, 1)
+				turn2D.side2 = getPlayingSideNumDuringTurnsPartOrNull(c.num, 2)
 				if c.num == current_turn_num:
 					now_position = _queueStart.rect_global_position + Vector2(-offset*34 + current_part*17 + 8,-2)
 			else:

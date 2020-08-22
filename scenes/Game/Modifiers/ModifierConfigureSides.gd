@@ -13,4 +13,7 @@ func execute(game):
 	game.configureSides(_names)
 
 func copy():
-	return get_script().new(_names)
+	var copy = get_script().new(_names)
+	copy.propagate = propagate
+	copy.silent = silent
+	return copy
