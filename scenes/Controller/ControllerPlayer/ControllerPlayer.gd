@@ -2,7 +2,7 @@ extends ControllerSpectator
 
 class_name ControllerPlayer
 
-signal resolveHighlight()
+signal takesAction(action)
 
-func registerHighlight():
-	pass
+func _on_Game2D_takesAction(action):
+	emit_signal("takesAction",action)

@@ -1,5 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/Controller/ControllerSpectator/ControllerSpectator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Controller/ControllerPlayer/ControllerPlayer.gd" type="Script" id=2]
 
 [node name="ControllerPlayer" instance=ExtResource( 1 )]
+script = ExtResource( 2 )

@@ -16,3 +16,9 @@ func _set_disabled(val):
 		$Label.set("custom_colors/font_color", Color.gray)
 	else:
 		$Label.set("custom_colors/font_color", Color.white)
+
+signal pressed()
+
+
+func _on_Button_pressed():
+	emit_signal("pressed")

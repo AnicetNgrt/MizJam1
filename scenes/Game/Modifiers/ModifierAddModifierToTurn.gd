@@ -22,7 +22,7 @@ func execute(game):
 		var child = get_child(0)
 		remove_child(child)
 		if _turnNum == game._timeline.current_turn_num and _part == game._timeline.current_part:
-			game._Stack.add_child(child)
+			game._stack.add_child(child)
 		else:
 			_turn.addModifier(child,_part)
 

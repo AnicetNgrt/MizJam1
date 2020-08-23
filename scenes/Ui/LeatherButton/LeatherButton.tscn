@@ -29,3 +29,4 @@ texture_disabled = ExtResource( 6 )
 margin_top = 10.0
 margin_bottom = 22.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -34,7 +34,7 @@ func copy():
 
 func getPastDescription():
 	if silent: return ""
-	var m = "<s"+str(_sideNum)+"> has received a "
+	var m = "<s"+str(_sideNum)+"> received a "
 	if not _isAlive:
 		m += "dead "
 	m += "pawn"
@@ -45,7 +45,7 @@ func getPastDescription():
 
 func getFutureDescription():
 	if silent: return ""
-	var m = "<s"+str(_sideNum)+"> did receive a "
+	var m = "<s"+str(_sideNum)+"> will receive a "
 	if not _isAlive:
 		m += "dead "
 	m += "pawn"

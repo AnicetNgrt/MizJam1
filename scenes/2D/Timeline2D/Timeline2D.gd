@@ -166,7 +166,7 @@ func _hide_bubble():
 
 func _on_offset_or_current_changed():
 	if current_turn_num + offset <= 0:
-		offset = -current_turn_num
+		offset = 0
 		_queueStart.disabled = true
 	else:
 		_queueStart.disabled = false

@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Action",
+"language": "GDScript",
+"path": "res://scenes/Action/Action.gd"
+}, {
+"base": "Action",
+"class": "ActionSkipTurn",
+"language": "GDScript",
+"path": "res://scenes/Action/Actions/ActionSkipTurn.gd"
+}, {
+"base": "Node",
 "class": "Board",
 "language": "GDScript",
 "path": "res://scenes/Board/Board.gd"
@@ -45,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Controller/ControllerSpectator/ControllerSpectator.gd"
 }, {
 "base": "Node",
+"class": "DialogContent",
+"language": "GDScript",
+"path": "res://scenes/DialogContent/DialogContent.gd"
+}, {
+"base": "Node",
 "class": "Game",
 "language": "GDScript",
 "path": "res://scenes/Game/Game.gd"
@@ -63,6 +78,16 @@ _global_script_classes=[ {
 "class": "Modifier",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/Modifier.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierAddDialog",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierAddDialog.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierAddDialogAndRead",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierAddDialogAndRead.gd"
 }, {
 "base": "Modifier",
 "class": "ModifierAddModifierToTurn",
@@ -100,9 +125,19 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Modifiers/ModifierConfigureSides.gd"
 }, {
 "base": "Modifier",
+"class": "ModifierForwardModifier",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierForwardModifier.gd"
+}, {
+"base": "Modifier",
 "class": "ModifierGiveActionPoints",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierGiveActionPoints.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierGotoNextTurn",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierGotoNextTurn.gd"
 }, {
 "base": "Modifier",
 "class": "ModifierGotoTurn",
@@ -155,6 +190,8 @@ _global_script_classes=[ {
 "path": "res://scenes/Turn/Turn.gd"
 } ]
 _global_script_class_icons={
+"Action": "",
+"ActionSkipTurn": "",
 "Board": "",
 "Card": "",
 "CardEffect": "",
@@ -162,10 +199,13 @@ _global_script_class_icons={
 "Controller": "",
 "ControllerPlayer": "",
 "ControllerSpectator": "",
+"DialogContent": "",
 "Game": "",
 "Game2D": "",
 "Highlightable": "",
 "Modifier": "",
+"ModifierAddDialog": "",
+"ModifierAddDialogAndRead": "",
 "ModifierAddModifierToTurn": "",
 "ModifierAddNTurn": "",
 "ModifierAddPawn": "",
@@ -173,7 +213,9 @@ _global_script_class_icons={
 "ModifierAddSideWith2DController": "",
 "ModifierBuildRectBoardFromSize": "",
 "ModifierConfigureSides": "",
+"ModifierForwardModifier": "",
 "ModifierGiveActionPoints": "",
+"ModifierGotoNextTurn": "",
 "ModifierGotoTurn": "",
 "ModifierPlanSidePlayAlternance": "",
 "ModifierRefillApEachTurn": "",
@@ -204,7 +246,7 @@ AudioSettings="*res://global/AudioSettings.gd"
 window/size/width=640
 window/size/height=360
 window/dpi/allow_hidpi=true
-window/stretch/mode="viewport"
+window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [importer_defaults]
@@ -228,6 +270,10 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
 }
 
 [rendering]

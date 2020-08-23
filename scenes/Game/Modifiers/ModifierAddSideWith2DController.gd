@@ -12,7 +12,7 @@ func _init(sname:String = "Anonymous side", actionPoints:int = 0, cname:String =
 # @param: game:Game
 func execute(game):
 	var side = .execute(game)
-	side.get_node("Controllers").add_child(_Controller2DPackedScene.instance())
+	side.addController(_Controller2DPackedScene.instance())
 
 func copy():
 	var copy = get_script().new(_sname, _actionPoints, _cname)

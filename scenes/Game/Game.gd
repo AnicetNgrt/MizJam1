@@ -8,7 +8,7 @@ const _default_rules = preload("res://resources/default_rules.tres")
 onready var _sides = $Sides
 onready var _board = $Board
 onready var _timeline = $Timeline
-onready var _Stack = $Stack
+onready var _stack = $Stack
 
 # @type: Modifier
 var _lastModifier = null
@@ -18,14 +18,16 @@ func _set_rules(value:Rules) -> void:
 	_rules = value
 
 func _physics_process(delta):
-	if _Stack.get_child_count() > 0:
-		executeModifier(_Stack.get_child(0))
+	if _stack.get_child_count() > 0:
+		var modifier = _stack.get_child(0)
+		executeModifier(modifier)
 
 func getTurnStartActionPoints() -> int:
 	return _rules.actionPoints
 
 # @param: modifier:Modifier
 func executeModifier(modifier):
+	if modifier.executed: return
 	if modifier.get_parent():
 		modifier.get_parent().remove_child(modifier)
 	var part = _timeline.getThisTurnOrNull()
@@ -43,6 +45,7 @@ func _spreadModifierToExecute(modifier):
 
 # @param: modifier:Modifier
 func undoModifier(modifier):
+	if not modifier.executed: return
 	modifier.undo(self)
 	_lastModifier = modifier.previousModifier
 	if modifier.propagate: _spreadModifierToUndo(modifier)
@@ -67,6 +70,7 @@ func configureSides(names:PoolStringArray):
 # @param: side:Side
 func addSide(side):
 	_sides.add_child(side)
+	side.connect("takesAction",self,"_on_side_takesAction")
 
 # @param: turn:Turn
 func addTurnToTimeline(turn):
@@ -78,6 +82,12 @@ func removeTurnFromTimeline(turn):
 
 func gotoTurn(turnNum:int, part:int):
 	_timeline.gotoTurnAndPart(turnNum, part)
+	var stack = _timeline.getThisTurnPartStackOrNull()
+	if stack != null:
+		var children = stack.get_children()
+		for c in children:
+			stack.remove_child(c)
+			_stack.add_child(c)
 
 func addActionPointsToSide(sideNum:int, count:int):
 	_getSideByNum(sideNum).actionPoints += count
@@ -94,6 +104,12 @@ func canAddPawnToSide(sideNum:int) -> bool:
 
 func removePawnFromSide(sideNum:int,pawn:Pawn):
 	_getSideByNum(sideNum).removePawn(pawn)
+
+func _on_side_takesAction(side, action):
+	if action.isValid(self, side):
+		var modifiers = action.getModifiers(self, side)
+		for m in modifiers:
+			_stack.add_child(m)
 
 # @pre: 1 <= sideNum <= 2
 func _getSideByNum(sideNum:int) -> Side:

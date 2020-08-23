@@ -6,14 +6,15 @@ var previousModifier:Modifier = null
 
 export var propagate: bool
 export var silent: bool
+var executed = false
 
 # @param: game:Game
 func execute(game):
-	pass
+	executed = true
 
 # @param: game:Game
 func undo(game):
-	pass
+	executed = false
 
 func copy():
 	var copy = get_script().new()
