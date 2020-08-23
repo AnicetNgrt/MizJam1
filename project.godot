@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Action/Action.gd"
 }, {
 "base": "Action",
+"class": "ActionPlacePawn",
+"language": "GDScript",
+"path": "res://scenes/Action/Actions/ActionPlacePawn.gd"
+}, {
+"base": "Action",
 "class": "ActionSkipTurn",
 "language": "GDScript",
 "path": "res://scenes/Action/Actions/ActionSkipTurn.gd"
@@ -28,11 +33,6 @@ _global_script_classes=[ {
 "class": "Card",
 "language": "GDScript",
 "path": "res://scenes/Card/Card.gd"
-}, {
-"base": "Node",
-"class": "CardEffect",
-"language": "GDScript",
-"path": "res://scenes/Card/cardEffects/CardEffect.gd"
 }, {
 "base": "Node",
 "class": "CardStack",
@@ -65,9 +65,9 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Game.gd"
 }, {
 "base": "Game",
-"class": "Game2D",
+"class": "GameReactive",
 "language": "GDScript",
-"path": "res://scenes/2D/Game2D/Game2D.gd"
+"path": "res://scenes/Controller/ControllerPlayer/ControllerReactive/GameReactive.gd"
 }, {
 "base": "Node",
 "class": "Highlightable",
@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierAddSideWith2DController.gd"
 }, {
+"base": "ModifierAddSide",
+"class": "ModifierAddSideWithNemoController",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierAddSideWithNémoController.gd"
+}, {
 "base": "Modifier",
 "class": "ModifierBuildRectBoardFromSize",
 "language": "GDScript",
@@ -123,6 +128,11 @@ _global_script_classes=[ {
 "class": "ModifierConfigureSides",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierConfigureSides.gd"
+}, {
+"base": "Modifier",
+"class": "ModifierConsumeCard",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierConsumeCard.gd"
 }, {
 "base": "Modifier",
 "class": "ModifierForwardModifier",
@@ -145,6 +155,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Modifiers/ModifierGotoTurn.gd"
 }, {
 "base": "Modifier",
+"class": "ModifierPlacePawn",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierPlacePawn.gd"
+}, {
+"base": "Modifier",
 "class": "ModifierPlanSidePlayAlternance",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierPlanSidePlayAlternance.gd"
@@ -155,6 +170,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Modifiers/ModifierRefillApEachTurn.gd"
 }, {
 "base": "Modifier",
+"class": "ModifierRemoveApEndTurn",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierRemoveApEndTurn.gd"
+}, {
+"base": "Modifier",
 "class": "ModifierSetPlayingSide",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierSetPlayingSide.gd"
@@ -163,6 +183,11 @@ _global_script_classes=[ {
 "class": "Pawn",
 "language": "GDScript",
 "path": "res://scenes/Pawn/Pawn.gd"
+}, {
+"base": "Node2D",
+"class": "Pawn2D",
+"language": "GDScript",
+"path": "res://scenes/2D/Pawn2D/Pawn2D.gd"
 }, {
 "base": "Node",
 "class": "Side",
@@ -191,17 +216,17 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
+"ActionPlacePawn": "",
 "ActionSkipTurn": "",
 "Board": "",
 "Card": "",
-"CardEffect": "",
 "CardStack": "",
 "Controller": "",
 "ControllerPlayer": "",
 "ControllerSpectator": "",
 "DialogContent": "",
 "Game": "",
-"Game2D": "",
+"GameReactive": "",
 "Highlightable": "",
 "Modifier": "",
 "ModifierAddDialog": "",
@@ -211,16 +236,21 @@ _global_script_class_icons={
 "ModifierAddPawn": "",
 "ModifierAddSide": "",
 "ModifierAddSideWith2DController": "",
+"ModifierAddSideWithNemoController": "",
 "ModifierBuildRectBoardFromSize": "",
 "ModifierConfigureSides": "",
+"ModifierConsumeCard": "",
 "ModifierForwardModifier": "",
 "ModifierGiveActionPoints": "",
 "ModifierGotoNextTurn": "",
 "ModifierGotoTurn": "",
+"ModifierPlacePawn": "",
 "ModifierPlanSidePlayAlternance": "",
 "ModifierRefillApEachTurn": "",
+"ModifierRemoveApEndTurn": "",
 "ModifierSetPlayingSide": "",
 "Pawn": "",
+"Pawn2D": "",
 "Side": "",
 "Tile": "",
 "Timeline": "",
@@ -245,6 +275,7 @@ AudioSettings="*res://global/AudioSettings.gd"
 
 window/size/width=640
 window/size/height=360
+window/size/fullscreen=true
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
@@ -274,6 +305,14 @@ texture={
 ogg_vorbis={
 "loop": false,
 "loop_offset": 0
+}
+
+[input]
+
+selectTile={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
 }
 
 [rendering]

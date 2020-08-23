@@ -82,18 +82,27 @@ func removeTurnFromTimeline(turn):
 
 func gotoTurn(turnNum:int, part:int):
 	_timeline.gotoTurnAndPart(turnNum, part)
+	var turn = _timeline.getThisTurnOrNull()
 	var stack = _timeline.getThisTurnPartStackOrNull()
-	if stack != null:
+	if stack != null and turn != null:
 		var children = stack.get_children()
 		for c in children:
-			stack.remove_child(c)
+			turn.removeModifier(c,stack.get_index()+1)
 			_stack.add_child(c)
+
+func consumeCard(sideNum:int, cardIndex:int):
+	var card = _getCard(sideNum, cardIndex)
+	card.consume()
 
 func addActionPointsToSide(sideNum:int, count:int):
 	_getSideByNum(sideNum).actionPoints += count
+	if _getSideByNum(sideNum).actionPoints < 0:
+		_getSideByNum(sideNum).actionPoints = 0
 
 func removeActionPointsFromSide(sideNum:int, count:int):
 	_getSideByNum(sideNum).actionPoints += count
+	if _getSideByNum(sideNum).actionPoints < 0:
+		_getSideByNum(sideNum).actionPoints = 0
 
 # @pre: canAddPawnToSide(sideNum) == true
 func addPawnToSide(sideNum:int,pawn:Pawn):
@@ -105,11 +114,31 @@ func canAddPawnToSide(sideNum:int) -> bool:
 func removePawnFromSide(sideNum:int,pawn:Pawn):
 	_getSideByNum(sideNum).removePawn(pawn)
 
+func placePawnTo(sideNum,pawnIndex,pos):
+	var side = _getSideByNum(sideNum)
+	var pawn = side.getPawns()[pawnIndex]
+	pawn.position = pos
+
 func _on_side_takesAction(side, action):
 	if action.isValid(self, side):
 		var modifiers = action.getModifiers(self, side)
 		for m in modifiers:
 			_stack.add_child(m)
+
+func canPawnBePlaced(side, pawnIndex:int):
+	var current = _timeline.getCurrentlyPlayingSideNumOrNull()
+	var pawns = side.getPawns()
+	if side.get_index()+1 != current or current == null: return false
+	if not pawns.size() > pawnIndex: return false
+	return true
+
+func isTileFree(pos):
+	if pos == Constants.UNPLACED_COORD: return true
+	for s in _sides.get_children():
+		var pawns = s.getPawns()
+		for p in pawns:
+			if p.getPosition() == pos: return false
+	return true
 
 # @pre: 1 <= sideNum <= 2
 func _getSideByNum(sideNum:int) -> Side:
@@ -117,3 +146,6 @@ func _getSideByNum(sideNum:int) -> Side:
 
 func _getSideCount() -> int:
 	return _sides.get_child_count()
+
+func _getCard(sideNum, cardIndex):
+	return _getSideByNum(sideNum).getCard(cardIndex)

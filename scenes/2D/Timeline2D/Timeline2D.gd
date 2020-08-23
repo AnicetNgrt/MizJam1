@@ -43,6 +43,7 @@ signal turn_hover_stops(num, part)
 func addTurn(turn):
 	.addTurn(turn)
 	turn.connect("modifierAdded",self,"_on_turnModifierAdded")
+	turn.connect("modifierRemoved",self,"_on_turnModifierRemoved")
 	var partNum = 0
 	for part in turn.get_children():
 		partNum += 1
@@ -64,7 +65,7 @@ func addTurn(turn):
 	if turn.num >= current_turn_num+offset and turn.num < current_turn_num+offset + 8:
 		turn2D.show()
 		if turn.num == current_turn_num:
-			var now_position = _queueStart.rect_global_position + Vector2(-offset*34 + current_part*17 + 8,-2)
+			var now_position = _queueStart.rect_global_position + Vector2(-offset*34 + current_part*17 + 8,-4)
 			_nowIndicator.position = now_position
 			_nowIndicator.show()
 	else:
@@ -166,7 +167,6 @@ func _hide_bubble():
 
 func _on_offset_or_current_changed():
 	if current_turn_num + offset <= 0:
-		offset = 0
 		_queueStart.disabled = true
 	else:
 		_queueStart.disabled = false
@@ -200,8 +200,12 @@ func _on_turnModifierAdded(modifier:Modifier,num:int,part:int):
 		descriptions[str(num)] = {}
 	if not descriptions[str(num)].has(str(part)):
 		descriptions[str(num)][str(part)] = []
-	descriptions[str(num)][str(part)].append({"past":modifier.getPastDescription(),"future":modifier.getFutureDescription()})
+	descriptions[str(num)][str(part)].append({"modifier":modifier,"past":modifier.getPastDescription(),"future":modifier.getFutureDescription()})
 	_on_offset_or_current_changed()
 
-func _on_turnModifierRemoved(index:int,num:int,part:int):
-	descriptions[num][part].remove(index)
+func _on_turnModifierRemoved(modifier:Modifier,num:int,part:int):
+	for descLine in descriptions[str(num)][str(part)]:
+		if descLine["modifier"] == modifier:
+			descriptions[str(num)][str(part)].erase(descLine)
+			_on_offset_or_current_changed()
+			return

@@ -11,11 +11,13 @@ func execute(game):
 	if game._timeline.current_part == 2:
 		var mod = ModifierGotoTurn.new(game._timeline.current_turn_num+1,1)
 		mod.propagate = true
+		mod.silent = true
 		game.executeModifier(mod)
 		
 	else:
 		var mod = ModifierGotoTurn.new(game._timeline.current_turn_num,2)
 		mod.propagate = true
+		mod.silent = true
 		game.executeModifier(mod)
 
 # @param: game:Game

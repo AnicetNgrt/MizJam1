@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/2D/Pawn2D/Pawn2D.gd" type="Script" id=1]
+[ext_resource path="res://assets/pawns/blue_pawn.png" type="Texture" id=2]
+[ext_resource path="res://assets/pawns/red_pawn.png" type="Texture" id=3]
+[ext_resource path="res://assets/audio/sfx/kenney_cardSlide4.ogg" type="AudioStream" id=4]
+
+[node name="Pawn2D" type="Node2D"]
+position = Vector2( 120, -16 )
+script = ExtResource( 1 )
+
+[node name="SpriteBlue" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+
+[node name="SpriteRed" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 1.0
+pitch_scale = 0.97
+bus = "Sfx"

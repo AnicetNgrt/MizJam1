@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Game/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddSideWith2DController.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Game/Modifiers/ModifierAddSide.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Game/Modifiers/ModifierAddSideWithNémoController.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierGotoTurn.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddNTurn.gd" type="Script" id=5]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierPlanSidePlayAlternance.gd" type="Script" id=6]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierRefillApEachTurn.gd" type="Script" id=7]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddPawn.gd" type="Script" id=8]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierBuildRectBoardFromSize.gd" type="Script" id=9]
+[ext_resource path="res://scenes/Game/Modifiers/ModifierRemoveApEndTurn.gd" type="Script" id=10]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierForwardModifier.gd" type="Script" id=11]
 [ext_resource path="res://scenes/DialogContent/DialogContent.gd" type="Script" id=12]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddDialogAndRead.gd" type="Script" id=13]
@@ -20,7 +21,7 @@ script = ExtResource( 2 )
 propagate = true
 _sname = "Player"
 
-[node name="ModifierAddSide" type="Node" parent="Stack" index="1"]
+[node name="ModifierAddSideWithNemoController" type="Node" parent="Stack" index="1"]
 script = ExtResource( 3 )
 propagate = true
 _sname = "Némo"
@@ -56,43 +57,46 @@ silent = true
 _actionPoints = 4
 _starting = 1
 
-[node name="ModifierAddPawn" type="Node" parent="Stack" index="7"]
+[node name="ModifierRemoveApEndTurn" type="Node" parent="Stack" index="7"]
+script = ExtResource( 10 )
+
+[node name="ModifierAddPawn" type="Node" parent="Stack" index="8"]
 script = ExtResource( 8 )
 propagate = true
 _sideNum = 1
 _isAlive = true
 
-[node name="ModifierAddPawn2" type="Node" parent="Stack" index="8"]
+[node name="ModifierAddPawn2" type="Node" parent="Stack" index="9"]
 script = ExtResource( 8 )
 propagate = true
 _sideNum = 1
 _isAlive = true
 
-[node name="ModifierAddPawn3" type="Node" parent="Stack" index="9"]
+[node name="ModifierAddPawn3" type="Node" parent="Stack" index="10"]
 script = ExtResource( 8 )
 propagate = true
 _sideNum = 1
 _isAlive = true
 
-[node name="ModifierAddPawn4" type="Node" parent="Stack" index="10"]
+[node name="ModifierAddPawn4" type="Node" parent="Stack" index="11"]
 script = ExtResource( 8 )
 propagate = true
 _sideNum = 2
 _isAlive = true
 
-[node name="ModifierAddPawn5" type="Node" parent="Stack" index="11"]
+[node name="ModifierAddPawn5" type="Node" parent="Stack" index="12"]
 script = ExtResource( 8 )
 propagate = true
 _sideNum = 2
 _isAlive = true
 
-[node name="ModifierAddPawn6" type="Node" parent="Stack" index="12"]
+[node name="ModifierAddPawn6" type="Node" parent="Stack" index="13"]
 script = ExtResource( 8 )
 propagate = true
 _sideNum = 2
 _isAlive = true
 
-[node name="ModifierForwardModifier" type="Node" parent="Stack" index="13"]
+[node name="ModifierForwardModifier" type="Node" parent="Stack" index="14"]
 script = ExtResource( 11 )
 propagate = true
 silent = true
@@ -103,11 +107,27 @@ silent = true
 
 [node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead" index="0"]
 script = ExtResource( 12 )
-title = "Master Némo 1"
+title = "Master Némo"
 text = "Welcome to ZUGZWANG.
 My name is Némo."
 
 [node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent" index="0"]
 script = ExtResource( 12 )
-title = "Master Némo 2"
-text = "I see you are going fine."
+title = "Master Némo"
+text = "I'll teach you the way of the ZUGZWANG."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "In this game 2 players face off.
+Kill all enemy pawns to win."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent/DialogContent/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "To kill a pawn use your cards, and to move your pawns use your cards aswell."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent/DialogContent/DialogContent/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "But first you need to put you pawns on the board. Click on a tile to put a pawn on it."

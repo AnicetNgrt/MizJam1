@@ -53,6 +53,10 @@ const _textures = [
 
 onready var _Texture = $CenterContainer/TextureRect
 
+signal hovered(tile)
+signal not_hovered(tile)
+signal clicked(tile)
+
 func _set_windDirection(val):
 	._set_windDirection(val)
 	_set_state(state)
@@ -92,3 +96,19 @@ func _set_state(val):
 		texture = row[1]
 	
 	$CenterContainer/TextureRect.texture = texture
+
+func getGlobalAnchorPos():
+	return $CenterContainer/Control.rect_global_position
+
+
+func _on_CenterContainer_mouse_entered():
+	emit_signal("hovered",self)
+	$CenterContainer/AudioStreamPlayer2D.play()
+
+func _on_CenterContainer_mouse_exited():
+	emit_signal("not_hovered",self)
+
+func _on_CenterContainer_gui_input(event):
+	if event is InputEventMouseButton:
+		if Input.is_action_pressed("selectTile"):
+			emit_signal("clicked",self)

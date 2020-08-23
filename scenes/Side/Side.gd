@@ -12,15 +12,22 @@ signal takesAction(side,action)
 func getPawnCount() -> int:
 	var count = 0
 	for c in get_children():
-		if c is Pawn:
+		if c is Pawn or c is Pawn2D:
 			count += 1
 	return count
 
-func addPawn(pawn:Pawn):
+func addPawn(pawn):
 	add_child(pawn)
 
-func removePawn(pawn:Pawn):
+func removePawn(pawn):
 	remove_child(pawn)
+
+func getPawns():
+	var pawns = []
+	for c in get_children():
+		if c is Pawn or c is Pawn2D:
+			pawns.append(c)
+	return pawns
 
 func spreadModifierToExecute(modifier:Modifier):
 	for c in _getControllers():
@@ -42,5 +49,21 @@ func addController(controller):
 	if controller is ControllerPlayer:
 		controller.connect("takesAction",self,"_on_controller_takes_action")
 
+func getCard(index):
+	return $HandStack.get_child(index)
+
+func getHandCards(index):
+	return $HandStack.get_children()
+
+func getRemainingCards(index):
+	return $RemainingStack.get_children()
+
 func _on_controller_takes_action(action):
 	emit_signal("takesAction",self,action)
+
+func getUnplacedPawns():
+	var pawns = []
+	for p in getPawns():
+		if p.getPosition() == Constants.UNPLACED_COORD:
+			pawns.append(p)
+	return pawns

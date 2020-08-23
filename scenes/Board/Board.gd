@@ -19,3 +19,6 @@ func clear():
 
 func tileNameFromPos(pos:Vector2):
 	return "Tile_"+str(pos.x)+"|"+str(pos.y)
+
+func getTile(pos:Vector2):
+	return get_node(tileNameFromPos(pos))

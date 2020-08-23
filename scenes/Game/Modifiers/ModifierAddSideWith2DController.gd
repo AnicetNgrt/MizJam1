@@ -2,7 +2,7 @@ extends ModifierAddSide
 
 class_name ModifierAddSideWith2DController
 
-const _Controller2DPackedScene = preload("res://scenes/Controller/Controller2D/Controller2D.tscn")
+const _Controller2DPackedScene = preload("res://scenes/Controller/ControllerPlayer/ControllerReactive/Controller2D/Controller2D.tscn")
 
 export var _cname:String
 

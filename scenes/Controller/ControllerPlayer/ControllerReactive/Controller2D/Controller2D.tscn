@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Controller/ControllerPlayer/ControllerReactive/Controller2D/Controller2D.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Controller/ControllerPlayer/ControllerReactive/Controller2D/Game2D/Game2D.tscn" type="PackedScene" id=2]
+
+[node name="Controller2D" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Game2D" parent="." instance=ExtResource( 2 )]

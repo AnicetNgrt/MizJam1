@@ -30,6 +30,7 @@ margin_top = -136.0
 margin_right = 258.0
 margin_bottom = -7.0
 grow_vertical = 0
+mouse_filter = 2
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,6 +41,7 @@ margin_top = 49.0
 margin_right = 218.0
 margin_bottom = 101.0
 rect_min_size = Vector2( 218, 52 )
+mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/margin_left = 0

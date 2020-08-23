@@ -4,7 +4,9 @@ class_name ActionSkipTurn
 
 func isValid(game, sender) -> bool:
 	var current = game._timeline.getCurrentlyPlayingSideNumOrNull()
-	return sender.get_index()+1 == current and current != null
+	var hasToBeHisTurn = sender.get_index()+1 == current and current != null
+	var hasToNotHaveUnplacedPawn = sender.getUnplacedPawns().size() == 0
+	return hasToBeHisTurn and hasToNotHaveUnplacedPawn
 
 func getModifiers(game, sender):
 	var children = get_children()
@@ -13,4 +15,4 @@ func getModifiers(game, sender):
 	return children
 
 func getNetworkObject():
-	return {name:"ActionSkipTurn"}
+	return {name:"SkipTurn"}
