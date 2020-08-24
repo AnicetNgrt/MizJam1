@@ -9,6 +9,7 @@ func isValid(game, sender) -> bool:
 	if not game.canPawnBePlaced(sender, pawnIndex): return false
 	var pawn = sender.getPawns()[pawnIndex]
 	#is from unplaced to placed or vice versa
+	if game._board.getTile(pos) == null: return false
 	if not game.isTileFree(pos): return false
 	if pos == Constants.UNPLACED_COORD and pawn.getPosition() == Constants.UNPLACED_COORD: return false
 	if pos != Constants.UNPLACED_COORD and pawn.getPosition() != Constants.UNPLACED_COORD: return false
@@ -24,4 +25,4 @@ func getModifiers(game, sender):
 	return [child]
 
 func getNetworkObject():
-	return {"name":"PlacePawn","pawnIndex":pawnIndex,"pos":pos}
+	return {"name":"PlacePawn","pawnIndex":pawnIndex,"pos_x":pos.x,"pos_y":pos.y}

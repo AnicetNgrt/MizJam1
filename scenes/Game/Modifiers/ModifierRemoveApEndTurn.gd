@@ -11,17 +11,18 @@ func _init(starting:int = 0):
 func execute(game):
 	.execute(game)
 	var _turnNums = game._timeline.getAllFutureAndPresentTurnNums()
+	var lastPlayingSide = null
 	for num in _turnNums:
 		if num >= _starting:
-			var lastPlayingSide = null
 			for i in range(1,3):
 				var playingSide = game._timeline.getPlayingSideNumDuringTurnsPartOrNull(num, i)
 				if lastPlayingSide != null:
 					var modInside = ModifierGiveActionPoints.new(lastPlayingSide,-4)
-					#modInside.silent = true
-					var mod = ModifierAddModifierToTurn.new(num, i, modInside)
+					modInside.silent = true
+					var mod = ModifierAddModifierToTurn.new(num, i)
 					mod.propagate = false
 					mod.silent = true
+					mod.add_child(modInside)
 					mod.execute(game)
 				lastPlayingSide = playingSide
 

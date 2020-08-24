@@ -1,5 +1,7 @@
 extends GameReactive
 
+var speakLock = true
+
 func _ready():
 	randomize()
 
@@ -10,6 +12,18 @@ func executeModifier(modifier):
 			if myTurn:
 				$Tween.interpolate_callback(self,0.5,"_tryPlacePawns")
 				$Tween.start()
+				speakLock = false
+		elif not speakLock:
+			speakLock = true
+			get_parent().emit_signal("speaks","Master Némo",[
+				"At this point I'm meant to explain you how to play cards.",
+				"But my developper, Anicet is a very lazy dude.",
+				"So he messed up my training program, and therefore no cards.",
+				"Yeah...",
+				"There is nothing to do in this demo anymore.",
+				"Except ... clicking everywhere and listening to the UI's sounds...",
+				"Or ... maybe also talking with me!"
+			])
 		if _canSkipTurn:
 			$Tween.interpolate_callback(get_parent(),0.5,"skipTurn")
 			$Tween.start()

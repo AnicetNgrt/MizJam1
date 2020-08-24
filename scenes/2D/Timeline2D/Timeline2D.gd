@@ -196,6 +196,7 @@ func _on_QueueFinish_pressed():
 	self.offset += 1 #self in order to call setter
 
 func _on_turnModifierAdded(modifier:Modifier,num:int,part:int):
+	if modifier == null: return
 	if not descriptions.has(str(num)):
 		descriptions[str(num)] = {}
 	if not descriptions[str(num)].has(str(part)):

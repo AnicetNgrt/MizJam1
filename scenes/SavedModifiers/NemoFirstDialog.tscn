@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/DialogContent/DialogContent.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Game/Modifiers/ModifierAddDialogAndRead.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Game/Modifiers/ModifierForwardModifier.gd" type="Script" id=3]
+
+[node name="ModifierForwardModifier" type="Node"]
+script = ExtResource( 3 )
+propagate = true
+silent = true
+
+[node name="ModifierAddDialogAndRead" type="Node" parent="."]
+script = ExtResource( 2 )
+silent = true
+
+[node name="DialogContent" type="Node" parent="ModifierAddDialogAndRead"]
+script = ExtResource( 1 )
+title = "Master Némo"
+text = "Welcome to ZUGZWANG.
+My name is Némo."
+
+[node name="DialogContent" type="Node" parent="ModifierAddDialogAndRead/DialogContent"]
+script = ExtResource( 1 )
+title = "Master Némo"
+text = "I'll teach you the way of the ZUGZWANG."
+
+[node name="DialogContent" type="Node" parent="ModifierAddDialogAndRead/DialogContent/DialogContent"]
+script = ExtResource( 1 )
+title = "Master Némo"
+text = "In this game 2 players face off.
+Kill all enemy pawns to win."
+
+[node name="DialogContent" type="Node" parent="ModifierAddDialogAndRead/DialogContent/DialogContent/DialogContent"]
+script = ExtResource( 1 )
+title = "Master Némo"
+text = "To kill a pawn use your cards, and to move your pawns use your cards aswell."
+
+[node name="DialogContent" type="Node" parent="ModifierAddDialogAndRead/DialogContent/DialogContent/DialogContent/DialogContent"]
+script = ExtResource( 1 )
+title = "Master Némo"
+text = "But first you need to put you pawns on the board. Click on a tile to put a pawn on it."

@@ -18,9 +18,12 @@ func execute(game):
 			for i in range(1,3):
 				var playingSide = game._timeline.getPlayingSideNumDuringTurnsPartOrNull(num, i)
 				if playingSide != null:
-					var mod = ModifierAddModifierToTurn.new(num, i, ModifierGiveActionPoints.new(playingSide,_actionPoints))
+					var mod = ModifierAddModifierToTurn.new(num, i)
 					mod.propagate = false
 					mod.silent = true
+					var inner = ModifierGiveActionPoints.new(playingSide,_actionPoints)
+					inner.propagate = false
+					mod.add_child(inner)
 					mod.execute(game)
 
 # @param: game:Game

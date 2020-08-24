@@ -26,15 +26,23 @@ func isPlayable() -> bool:
 	return not isOverplayed()
 
 func isPlayableFor(game, side):
-	if not isPlayable(): return false
+	if not isPlayable(): 
+		print("overplay")
+		return false
 	var current = game._timeline.getCurrentlyPlayingSideNumOrNull()
-	if not side.get_index()+1 == current: return false
-	if not side.get_index()+1 == sideNum: return false
-	if not side.actionPoints >= cost: return false
+	if not side.get_index()+1 == current: 
+		print("not playing")
+		return false
+	if not side.get_index()+1 == sideNum:
+		print("not owner")
+		return false
+	if not side.actionPoints >= cost: 
+		print("no AP")
+		return false
 	return true
 
 func isOverplayed() -> bool:
-	return not isOverplayedGame() and not isOverplayedTurn()
+	return isOverplayedGame() or isOverplayedTurn()
 
 func isOverplayedGame() -> bool:
 	return limitGame <= playedGame
@@ -42,7 +50,7 @@ func isOverplayedGame() -> bool:
 func isOverplayedTurn() -> bool:
 	return limitTurn <= playedTurn
 
-func isInterestedByPawn(game, sender, sideNum, pawnIndex):
+func isInterestedByPawn(game, sender, pawnSideNum, pawnIndex):
 	return false
 
 func assignPawn(sideNum, pawnIndex):
@@ -51,16 +59,24 @@ func assignPawn(sideNum, pawnIndex):
 func isInterestedByTile(game, sender, pos):
 	return false
 
-func isInterestedByCard(game, sender, sideNum, cardIndex):
+func assignTile(pos):
 	pass
 
-func assignCard(sideNum, pawnIndex):
+func isInterestedByCard(game, sender, cardSideNum, cardIndex):
 	return false
+
+func assignCard(sideNum, pawnIndex):
+	pass
 
 func consume():
 	playedTurn -= 1
 	playedGame -= 1
 
-# @pre: isPlayable() == true
-func play(game, sender) -> void:
-	pass
+func playTurnLeft():
+	if limitTurn  == 999: return limitTurn
+	return limitTurn - playedTurn
+
+func playGameLeft():
+	if limitGame  == 999: return limitGame
+	return limitGame - playedGame
+

@@ -67,10 +67,16 @@ func configureSides(names:PoolStringArray):
 			c.sname = names[i]
 			i += 1
 
+func giveCard(card, sideNum):
+	var side = _getSideByNum(sideNum)
+	card.sideNum = sideNum
+	side.addCard(card)
+
 # @param: side:Side
 func addSide(side):
 	_sides.add_child(side)
 	side.connect("takesAction",self,"_on_side_takesAction")
+	side.connect("speaks",self,"_on_side_speaks")
 
 # @param: turn:Turn
 func addTurnToTimeline(turn):
@@ -140,6 +146,14 @@ func isTileFree(pos):
 			if p.getPosition() == pos: return false
 	return true
 
+func _getPawnOnTileOrNull(pos):
+	if pos == Constants.UNPLACED_COORD: return null
+	for s in _sides.get_children():
+		var pawns = s.getPawns()
+		for p in pawns:
+			if p.getPosition() == pos: return p
+	return null
+
 # @pre: 1 <= sideNum <= 2
 func _getSideByNum(sideNum:int) -> Side:
 	return _sides.get_child(sideNum - 1)
@@ -149,3 +163,24 @@ func _getSideCount() -> int:
 
 func _getCard(sideNum, cardIndex):
 	return _getSideByNum(sideNum).getCard(cardIndex)
+
+func _getPawn(sideNum, pawnIndex):
+	return _getSideByNum(sideNum).getPawns()[pawnIndex]
+
+func _on_side_speaks(sname, messages, character = "Némo"):
+	var dialogModifier = ModifierAddDialogAndRead.new()
+	dialogModifier.silent = true
+	dialogModifier.propagate = false
+	var last_child = dialogModifier
+	for m in messages:
+		var dc = DialogContent.new()
+		dc.title = sname
+		dc.character = character
+		dc.text = m
+		last_child.add_child(dc)
+		last_child = dc
+	var propagator = ModifierForwardModifier.new()
+	propagator.silent = true
+	propagator.propagate = true
+	propagator.add_child(dialogModifier)
+	_stack.add_child(propagator)

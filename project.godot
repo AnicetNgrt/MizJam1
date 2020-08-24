@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Action/Action.gd"
 }, {
 "base": "Action",
+"class": "ActionMovePawnRelative",
+"language": "GDScript",
+"path": "res://scenes/Action/Actions/ActionMovePawnRelative.gd"
+}, {
+"base": "Action",
 "class": "ActionPlacePawn",
 "language": "GDScript",
 "path": "res://scenes/Action/Actions/ActionPlacePawn.gd"
@@ -33,6 +38,11 @@ _global_script_classes=[ {
 "class": "Card",
 "language": "GDScript",
 "path": "res://scenes/Card/Card.gd"
+}, {
+"base": "CenterContainer",
+"class": "Card2D",
+"language": "GDScript",
+"path": "res://scenes/2D/HandStack2D/Card2D.gd"
 }, {
 "base": "Node",
 "class": "CardStack",
@@ -58,6 +68,11 @@ _global_script_classes=[ {
 "class": "DialogContent",
 "language": "GDScript",
 "path": "res://scenes/DialogContent/DialogContent.gd"
+}, {
+"base": "Card",
+"class": "DisplacementCard",
+"language": "GDScript",
+"path": "res://scenes/Card/DisplacementCard.gd"
 }, {
 "base": "Node",
 "class": "Game",
@@ -145,6 +160,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Game/Modifiers/ModifierGiveActionPoints.gd"
 }, {
 "base": "Modifier",
+"class": "ModifierGiveCard",
+"language": "GDScript",
+"path": "res://scenes/Game/Modifiers/ModifierGiveCard.gd"
+}, {
+"base": "Modifier",
 "class": "ModifierGotoNextTurn",
 "language": "GDScript",
 "path": "res://scenes/Game/Modifiers/ModifierGotoNextTurn.gd"
@@ -199,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Tile/Tile.gd"
 }, {
+"base": "AnimatedSprite",
+"class": "TileCrosshair",
+"language": "GDScript",
+"path": "res://scenes/Controller/ControllerPlayer/ControllerReactive/Controller2D/Game2D/TileCrosshair.gd"
+}, {
 "base": "Node",
 "class": "Timeline",
 "language": "GDScript",
@@ -216,15 +241,18 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
+"ActionMovePawnRelative": "",
 "ActionPlacePawn": "",
 "ActionSkipTurn": "",
 "Board": "",
 "Card": "",
+"Card2D": "",
 "CardStack": "",
 "Controller": "",
 "ControllerPlayer": "",
 "ControllerSpectator": "",
 "DialogContent": "",
+"DisplacementCard": "",
 "Game": "",
 "GameReactive": "",
 "Highlightable": "",
@@ -242,6 +270,7 @@ _global_script_class_icons={
 "ModifierConsumeCard": "",
 "ModifierForwardModifier": "",
 "ModifierGiveActionPoints": "",
+"ModifierGiveCard": "",
 "ModifierGotoNextTurn": "",
 "ModifierGotoTurn": "",
 "ModifierPlacePawn": "",
@@ -253,6 +282,7 @@ _global_script_class_icons={
 "Pawn2D": "",
 "Side": "",
 "Tile": "",
+"TileCrosshair": "",
 "Timeline": "",
 "Timeline2D": "",
 "Turn": ""
@@ -260,8 +290,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MizJam1"
-run/main_scene="res://scenes/Game/TutorialGame.tscn"
+config/name="Zugzwang48"
+run/main_scene="res://scenes/Main/Main.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
 
 [autoload]
 
@@ -275,7 +307,6 @@ AudioSettings="*res://global/AudioSettings.gd"
 
 window/size/width=640
 window/size/height=360
-window/size/fullscreen=true
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

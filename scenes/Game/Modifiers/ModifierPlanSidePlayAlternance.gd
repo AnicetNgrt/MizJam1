@@ -14,10 +14,12 @@ func execute(game):
 	.execute(game)
 	var _turnNums = game._timeline.getAllFutureAndPresentTurnNums()
 	for num in _turnNums:
-		var modA = ModifierAddModifierToTurn.new(num, 1, ModifierSetPlayingSide.new(_sideA))
+		var innerA = ModifierSetPlayingSide.new(_sideA)
+		var modA = ModifierAddModifierToTurn.new(num, 1, innerA)
 		modA.propagate = false
 		modA.silent = true
-		var modB = ModifierAddModifierToTurn.new(num, 2, ModifierSetPlayingSide.new(_sideB))
+		var innerB = ModifierSetPlayingSide.new(_sideB)
+		var modB = ModifierAddModifierToTurn.new(num, 2, innerB)
 		modB.propagate = false
 		modB.silent = true
 		modA.execute(game)

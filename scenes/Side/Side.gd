@@ -8,6 +8,7 @@ export(String) var sname
 export(int,0,999) var actionPoints: int
 
 signal takesAction(side,action)
+signal speaks(sname,messages)
 
 func getPawnCount() -> int:
 	var count = 0
@@ -18,6 +19,9 @@ func getPawnCount() -> int:
 
 func addPawn(pawn):
 	add_child(pawn)
+
+func addCard(card):
+	$HandStack.addCard(card)
 
 func removePawn(pawn):
 	remove_child(pawn)
@@ -44,22 +48,26 @@ func _getControllers():
 
 func addController(controller):
 	_controllers.add_child(controller)
+	controller.connect("speaks",self,"_on_controller_speaks")
 	if controller is ControllerSpectator:
 		controller.mySide = get_index()+1
 	if controller is ControllerPlayer:
 		controller.connect("takesAction",self,"_on_controller_takes_action")
 
 func getCard(index):
-	return $HandStack.get_child(index)
+	return $HandStack.getCard(index)
 
-func getHandCards(index):
-	return $HandStack.get_children()
+func getHandCards():
+	return $HandStack.getHandCards()
 
-func getRemainingCards(index):
+func getRemainingCards():
 	return $RemainingStack.get_children()
 
 func _on_controller_takes_action(action):
 	emit_signal("takesAction",self,action)
+
+func _on_controller_speaks(sname,messages):
+	emit_signal("speaks",sname.replace("<s>",sname),messages)
 
 func getUnplacedPawns():
 	var pawns = []

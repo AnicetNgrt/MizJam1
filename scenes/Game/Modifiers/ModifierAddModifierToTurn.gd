@@ -4,37 +4,45 @@ class_name ModifierAddModifierToTurn
 
 export var _turnNum:int
 export var _part:int
+var _modifier
 var _turn = null
 
-func _init(turnNum:int = 0, part:int = 1, modifier:Modifier = Modifier.new()):
+func _ready():
+	_modifier = get_child(0)
+	_modifier.propagate = false
+
+func _init(turnNum:int = 0, part:int = 1, modifier = null):
 	_turnNum = turnNum
 	_part = part
-	if get_child_count() > 0:
-		get_child(0).queue_free()
-	add_child(modifier)
-	modifier.propagate = false
+	if modifier != null:
+		_modifier = modifier
+		_modifier.propagate = false
 
 # @param: game:Game
 func execute(game):
 	.execute(game)
 	var _turn = game._timeline.getTurnOrNull(_turnNum)
 	if _turn != null:
-		var child = get_child(0)
-		remove_child(child)
+		if _modifier == null:
+			_modifier = get_child(0)
+			_modifier.propagate = false
+		if _modifier.get_parent():
+			_modifier.get_parent().remove_child(_modifier)
 		if _turnNum == game._timeline.current_turn_num and _part == game._timeline.current_part:
-			game._stack.add_child(child)
+			game._stack.add_child(_modifier)
 		else:
-			_turn.addModifier(child,_part)
+			_turn.addModifier(_modifier,_part)
 
 # @param: game:Game
 func undo(game):
 	.undo(game)
-	if _turn != null:
-		_turn.removeModifier(get_child(0),_part)
-		_turn = null
 
 func copy():
-	var copy = get_script().new(_turnNum, _part, get_child(0).copy())
+	var copy = get_script().new(_turnNum, _part)
+	if _modifier == null:
+		_modifier = get_child(0)
+		_modifier.propagate = false
+	copy.add_child(_modifier.copy())
 	copy.propagate = propagate
 	copy.silent = silent
 	return copy
@@ -48,7 +56,13 @@ func getFutureDescription():
 	return ""
 
 func getPropagatedVersion():
-	var ret = get_script().new(_turnNum, _part, get_child(0).getPropagatedVersion())
+	if not is_inside_tree(): yield(self, "ready")
+	if _modifier == null:
+		_modifier = get_child(0)
+		_modifier.propagate = false
+	var prop = _modifier.getPropagatedVersion()
+	var ret = get_script().new(_turnNum, _part)
+	ret.add_child(prop)
 	ret.silent = silent
 	ret.propagate = propagate
 	return ret

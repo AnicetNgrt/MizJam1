@@ -1,6 +1,8 @@
 tool
 extends AnimatedSprite
 
+class_name TileCrosshair
+
 enum Kinds {
 	NORMAL = 0, MOVE = 2, KILL = 3, FORBIDDEN = 1, SELECTED = 4
 }
@@ -20,4 +22,5 @@ func _set_kind(val):
 	frames = spfs[kind]
 
 func _ready():
+	frames = spfs[kind]
 	play("default")

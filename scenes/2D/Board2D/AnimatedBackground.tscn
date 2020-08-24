@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/dojos/background.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "scroll"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( -32, 0 ) ]
+}
+
+[node name="Background" type="Sprite"]
+position = Vector2( -30.5274, -1.47255 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/scroll = SubResource( 1 )

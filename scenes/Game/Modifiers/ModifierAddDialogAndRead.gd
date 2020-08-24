@@ -11,8 +11,9 @@ func execute(game):
 	if get_child_count() > 0 and game.has_method("addDialog") and game.has_method("readDialogFromName"):
 		var content = get_child(0)
 		remove_child(content)
-		var _name = game.addDialog(content)
-		game.readDialogFromName(_name)
+		if game.has_method("addDialog"):
+			var _name = game.addDialog(content)
+			game.readDialogFromName(_name)
 
 func copy():
 	var copy = get_script().new()

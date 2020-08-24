@@ -155,14 +155,6 @@ align = 1
 
 [node name="HighlightsBottom" type="Node2D" parent="."]
 
-[node name="TileCrosshair" type="AnimatedSprite" parent="HighlightsBottom"]
-position = Vector2( 192, -16 )
-frames = ExtResource( 14 )
-frame = 1
-playing = true
-script = ExtResource( 13 )
-kind = 2
-
 [node name="Sides" type="Node" parent="."]
 
 [node name="Timeline" parent="." instance=ExtResource( 2 )]
@@ -172,7 +164,6 @@ kind = 2
 [node name="TileCrosshair" type="AnimatedSprite" parent="HighlightsTop"]
 position = Vector2( 192, -16 )
 frames = ExtResource( 14 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 kind = 2

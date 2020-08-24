@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Game/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddSideWith2DController.gd" type="Script" id=2]
@@ -10,9 +10,14 @@
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddPawn.gd" type="Script" id=8]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierBuildRectBoardFromSize.gd" type="Script" id=9]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierRemoveApEndTurn.gd" type="Script" id=10]
-[ext_resource path="res://scenes/Game/Modifiers/ModifierForwardModifier.gd" type="Script" id=11]
+[ext_resource path="res://assets/audio/music/Cinematic Piano (6 tracks) - Free No Copyright Music - Liborio Conti - 01 Lunaris.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/DialogContent/DialogContent.gd" type="Script" id=12]
 [ext_resource path="res://scenes/Game/Modifiers/ModifierAddDialogAndRead.gd" type="Script" id=13]
+[ext_resource path="res://scenes/Game/Modifiers/ModifierAddModifierToTurn.gd" type="Script" id=14]
+[ext_resource path="res://scenes/Game/Modifiers/ModifierGiveCard.gd" type="Script" id=15]
+[ext_resource path="res://scenes/Card/DisplacementCard.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/SavedModifiers/NemoFirstDialog.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/Game/Music.gd" type="Script" id=18]
 
 [node name="TutorialGame" instance=ExtResource( 1 )]
 
@@ -59,75 +64,624 @@ _starting = 1
 
 [node name="ModifierRemoveApEndTurn" type="Node" parent="Stack" index="7"]
 script = ExtResource( 10 )
-
-[node name="ModifierAddPawn" type="Node" parent="Stack" index="8"]
-script = ExtResource( 8 )
-propagate = true
-_sideNum = 1
-_isAlive = true
-
-[node name="ModifierAddPawn2" type="Node" parent="Stack" index="9"]
-script = ExtResource( 8 )
-propagate = true
-_sideNum = 1
-_isAlive = true
-
-[node name="ModifierAddPawn3" type="Node" parent="Stack" index="10"]
-script = ExtResource( 8 )
-propagate = true
-_sideNum = 1
-_isAlive = true
-
-[node name="ModifierAddPawn4" type="Node" parent="Stack" index="11"]
-script = ExtResource( 8 )
-propagate = true
-_sideNum = 2
-_isAlive = true
-
-[node name="ModifierAddPawn5" type="Node" parent="Stack" index="12"]
-script = ExtResource( 8 )
-propagate = true
-_sideNum = 2
-_isAlive = true
-
-[node name="ModifierAddPawn6" type="Node" parent="Stack" index="13"]
-script = ExtResource( 8 )
-propagate = true
-_sideNum = 2
-_isAlive = true
-
-[node name="ModifierForwardModifier" type="Node" parent="Stack" index="14"]
-script = ExtResource( 11 )
 propagate = true
 silent = true
+_starting = 1
 
-[node name="ModifierAddDialogAndRead" type="Node" parent="Stack/ModifierForwardModifier" index="0"]
+[node name="ModifierForwardModifier" parent="Stack" index="8" instance=ExtResource( 17 )]
+
+[node name="ModifierAddPawn" type="Node" parent="Stack" index="9"]
+script = ExtResource( 8 )
+propagate = true
+_sideNum = 1
+_isAlive = true
+
+[node name="ModifierAddPawn2" type="Node" parent="Stack" index="10"]
+script = ExtResource( 8 )
+propagate = true
+_sideNum = 1
+_isAlive = true
+
+[node name="ModifierAddPawn3" type="Node" parent="Stack" index="11"]
+script = ExtResource( 8 )
+propagate = true
+_sideNum = 1
+_isAlive = true
+
+[node name="ModifierAddPawn4" type="Node" parent="Stack" index="12"]
+script = ExtResource( 8 )
+propagate = true
+_sideNum = 2
+_isAlive = true
+
+[node name="ModifierAddPawn5" type="Node" parent="Stack" index="13"]
+script = ExtResource( 8 )
+propagate = true
+_sideNum = 2
+_isAlive = true
+
+[node name="ModifierAddPawn6" type="Node" parent="Stack" index="14"]
+script = ExtResource( 8 )
+propagate = true
+_sideNum = 2
+_isAlive = true
+
+[node name="ModifierAddModifierToTurn" type="Node" parent="Stack" index="15"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 1
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 999
+limitGame = 999
+cost = 1
+pattern = PoolVector2Array( -1, -2, 1, -2, 2, -1, 2, 1, 1, 2, -1, 2, -2, 1, -2, -1 )
+
+[node name="ModifierAddModifierToTurn2" type="Node" parent="Stack" index="16"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 1
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn2" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn2/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn3" type="Node" parent="Stack" index="17"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn3" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn3/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn4" type="Node" parent="Stack" index="18"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn4" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn4/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn5" type="Node" parent="Stack" index="19"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn5" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn5/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn6" type="Node" parent="Stack" index="20"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn6" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn6/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn10" type="Node" parent="Stack" index="21"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn10" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn10/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn9" type="Node" parent="Stack" index="22"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn9" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn9/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn8" type="Node" parent="Stack" index="23"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn8" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn8/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn7" type="Node" parent="Stack" index="24"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn7" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn7/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn18" type="Node" parent="Stack" index="25"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn18" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn18/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn17" type="Node" parent="Stack" index="26"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn17" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn17/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn16" type="Node" parent="Stack" index="27"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn16" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn16/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn15" type="Node" parent="Stack" index="28"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn15" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn15/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn14" type="Node" parent="Stack" index="29"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn14" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn14/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn13" type="Node" parent="Stack" index="30"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn13" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn13/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn12" type="Node" parent="Stack" index="31"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn12" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn12/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn11" type="Node" parent="Stack" index="32"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierGiveCard" type="Node" parent="Stack/ModifierAddModifierToTurn11" index="0"]
+script = ExtResource( 15 )
+_sideNum = 1
+
+[node name="DisplacementCard" parent="Stack/ModifierAddModifierToTurn11/ModifierGiveCard" index="0" instance=ExtResource( 16 )]
+label = "Knight"
+weight = 8
+limitTurn = 1
+limitGame = 3
+cost = 1
+pattern = PoolVector2Array( -2, 2, 2, -2, -2, -2, 2, 2 )
+
+[node name="ModifierAddModifierToTurn19" type="Node" parent="Stack" index="33"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 2
+_part = 1
+
+[node name="ModifierAddDialogAndRead" type="Node" parent="Stack/ModifierAddModifierToTurn19" index="0"]
 script = ExtResource( 13 )
 silent = true
 
-[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead" index="0"]
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn19/ModifierAddDialogAndRead" index="0"]
 script = ExtResource( 12 )
 title = "Master Némo"
-text = "Welcome to ZUGZWANG.
-My name is Némo."
+text = "Oh, and also he waisted time playing with his nice little game scripting tools..."
 
-[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent" index="0"]
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn19/ModifierAddDialogAndRead/DialogContent" index="0"]
 script = ExtResource( 12 )
 title = "Master Némo"
-text = "I'll teach you the way of the ZUGZWANG."
+text = "...  as you can see."
 
-[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent/DialogContent" index="0"]
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn19/ModifierAddDialogAndRead/DialogContent/DialogContent2" index="0"]
 script = ExtResource( 12 )
 title = "Master Némo"
-text = "In this game 2 players face off.
-Kill all enemy pawns to win."
+text = "Like, how many cards did he gave you? 18 ?"
 
-[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent/DialogContent/DialogContent" index="0"]
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn19/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2" index="0"]
 script = ExtResource( 12 )
 title = "Master Némo"
-text = "To kill a pawn use your cards, and to move your pawns use your cards aswell."
+text = "Holy  lampadaire!
+This guy is crazy..."
 
-[node name="DialogContent" type="Node" parent="Stack/ModifierForwardModifier/ModifierAddDialogAndRead/DialogContent/DialogContent/DialogContent/DialogContent" index="0"]
+[node name="ModifierAddModifierToTurn20" type="Node" parent="Stack" index="34"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 3
+_part = 1
+
+[node name="ModifierAddDialogAndRead" type="Node" parent="Stack/ModifierAddModifierToTurn20" index="0"]
+script = ExtResource( 13 )
+silent = true
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn20/ModifierAddDialogAndRead" index="0"]
 script = ExtResource( 12 )
 title = "Master Némo"
-text = "But first you need to put you pawns on the board. Click on a tile to put a pawn on it."
+text = "I saw it all: First he said he was about to implement online multiplayer."
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn20/ModifierAddDialogAndRead/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "Then he saw the clock ticking and he said he would only go for PeerToPeer multiplayer."
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn20/ModifierAddDialogAndRead/DialogContent/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "After that, he wanted a thing to speak with him.
+So guess what?"
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn20/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "He waisted time creating me!"
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn20/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "ThEN He PROMisED ME He WOuLD CoDE mE A MAgnIFicIENT BRAIN!"
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn20/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent2/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "AND ThEN GUeSS WHaT ???!!!!"
+
+[node name="ModifierAddModifierToTurn21" type="Node" parent="Stack" index="35"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 8
+_part = 1
+
+[node name="ModifierAddDialogAndRead" type="Node" parent="Stack/ModifierAddModifierToTurn21" index="0"]
+script = ExtResource( 13 )
+silent = true
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn21/ModifierAddDialogAndRead" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "Anyway, all you do is waisting your time here..."
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn21/ModifierAddDialogAndRead/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "Don't you have other games to play? Rate?"
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn21/ModifierAddDialogAndRead/DialogContent/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "Or maybe you are a perfectionnist. Maybe you have code to fix and improve?"
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn21/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "Just like AnICeT ..."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn21/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "FIX ME NOW ANICET YOU @#&~é$ StoP WriTIng MY DiaLOGUES IN ThaT Text EDiTOR"
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn21/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Grumpy AI"
+text = "DOn'TT YOU havE BETTER thINGS TO Do ?"
+
+[node name="ModifierAddModifierToTurn22" type="Node" parent="Stack" index="36"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 9
+_part = 1
+
+[node name="ModifierAddDialogAndRead" type="Node" parent="Stack/ModifierAddModifierToTurn22" index="0"]
+script = ExtResource( 13 )
+silent = true
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn22/ModifierAddDialogAndRead" index="0"]
+script = ExtResource( 12 )
+title = "Grumpy AI"
+text = "Hey! STOP chAnGIng MY BEAUtiFul NAME!
+You THOUghT YoU whERE On DISCord ANicet?"
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn22/ModifierAddDialogAndRead/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Mad Némo"
+text = "YoU SHoulD Go FIX yoUR GAMe While YOU STILL Can! 
+ANd STop DOIng WeiRD CapS ThINGS!"
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn22/ModifierAddDialogAndRead/DialogContent/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Ok Némo"
+text = "Thanks! Stupid caps effect, I hope it didn't make your eyes bleed."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn22/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "You know, its hard having a dev that's making you say stupid stuff at 3a.m."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn22/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "Like just 1 hour before the jam's deadline..."
+
+[node name="ModifierAddModifierToTurn23" type="Node" parent="Stack" index="37"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 10
+_part = 1
+
+[node name="ModifierAddDialogAndRead" type="Node" parent="Stack/ModifierAddModifierToTurn23" index="0"]
+script = ExtResource( 13 )
+silent = true
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn23/ModifierAddDialogAndRead" index="0"]
+script = ExtResource( 12 )
+title = "Grumpy AI"
+text = "Oh God! Did he built the HTML version?"
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn23/ModifierAddDialogAndRead/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Mad Némo"
+text = "If he does not all those lazy people are not going to play..."
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn23/ModifierAddDialogAndRead/DialogContent/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Ok Némo"
+text = "and then Anicet will be discouraged..."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn23/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "If he looses hope he will never finish this game..."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn23/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "Like, you know, its the 9th time this year he makes an half-baked prototype for it..."
+
+[node name="DialogContent3" type="Node" parent="Stack/ModifierAddModifierToTurn23/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "First in JS, then Python, Python again, Java after that, Typescript, EvEN KotLiN ?"
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn23/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2/DialogContent/DialogContent/DialogContent3" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "And now what?
+Godot Engine?
+This guy is mad mad mad..."
+
+[node name="ModifierAddModifierToTurn24" type="Node" parent="Stack" index="38"]
+script = ExtResource( 14 )
+propagate = true
+silent = true
+_turnNum = 11
+_part = 1
+
+[node name="ModifierAddDialogAndRead" type="Node" parent="Stack/ModifierAddModifierToTurn24" index="0"]
+script = ExtResource( 13 )
+silent = true
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn24/ModifierAddDialogAndRead" index="0"]
+script = ExtResource( 12 )
+title = "Grumpy AI"
+text = "But its very late now, I can't hear Anicet anymore."
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn24/ModifierAddDialogAndRead/DialogContent" index="0"]
+script = ExtResource( 12 )
+title = "Mad Némo"
+text = "I will kinda miss him...
+He was slightly mad but..."
+
+[node name="DialogContent2" type="Node" parent="Stack/ModifierAddModifierToTurn24/ModifierAddDialogAndRead/DialogContent/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Ok Némo"
+text = "... his Python coding was so clean...."
+
+[node name="DialogContent" type="Node" parent="Stack/ModifierAddModifierToTurn24/ModifierAddDialogAndRead/DialogContent/DialogContent2/DialogContent2" index="0"]
+script = ExtResource( 12 )
+title = "Master Némo"
+text = "OH ANICETO SEMPAI! Come back to me!"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 11 )
+bus = "Music"
+script = ExtResource( 18 )
