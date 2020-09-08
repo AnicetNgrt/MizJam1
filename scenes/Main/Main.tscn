@@ -20,6 +20,8 @@ script = ExtResource( 7 )
 [node name="MenuUi" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -5.66324
+margin_bottom = -5.66324
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -162,5 +164,6 @@ __meta__ = {
 margin_left = 0.0
 margin_right = 112.0
 label = "Play"
+disabled = false
 [connection signal="finished" from="MenuUi/MusicPlayer" to="MenuUi/MusicPlayer" method="_on_MusicPlayer_finished"]
 [connection signal="pressed" from="MenuUi/Body/BodyInner/BodyRows/ButtonTutorial" to="." method="_on_ButtonTutorial_pressed"]

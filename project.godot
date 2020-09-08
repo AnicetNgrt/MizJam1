@@ -305,8 +305,8 @@ AudioSettings="*res://global/AudioSettings.gd"
 
 [display]
 
-window/size/width=640
-window/size/height=360
+window/size/width=670
+window/size/height=390
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
